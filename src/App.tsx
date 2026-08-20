@@ -43,6 +43,31 @@ function Kicker({ index, children }: { index?: string; children: ReactNode }) {
   );
 }
 
+function PractitionersSection() {
+  return (
+    <section className="practitioners-section" id="autoridade" aria-labelledby="practitioners-title">
+      <div className="container practitioners-grid-v2">
+        <Reveal as="figure" className="practitioners-image">
+          <img src="/brand/executive-workshop.jpg" alt="Equipe reunida em um workshop executivo colaborativo" loading="lazy" decoding="async" />
+          <figcaption><span>Presença humana</span>Capacitação ao vivo, aplicada ao contexto da empresa.</figcaption>
+        </Reveal>
+
+        <Reveal className="practitioners-copy" order={1}>
+          <Kicker index="01">{PRACTITIONERS.eyebrow}</Kicker>
+          <h2 id="practitioners-title" className="section-title">Quem ensina também implementa.</h2>
+          <p className="practitioners-statement">{PRACTITIONERS.statement}</p>
+          <p>{PRACTITIONERS.body}</p>
+          <dl className="practitioner-stats">
+            <div><dt><CountUp value="45+" /></dt><dd>empresas atendidas</dd></div>
+            <div><dt><CountUp value="230+" /></dt><dd>projetos entregues</dd></div>
+          </dl>
+          <blockquote>“Não começamos perguntando quais funcionalidades ensinar. Começamos perguntando como o trabalho deveria funcionar com IA.”</blockquote>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
   return (
     <>
@@ -52,11 +77,12 @@ export default function App() {
       <main id="conteudo">
         <Hero />
         <ClientLogos />
+        <PractitionersSection />
 
         <section className="decision-section" id="como-funciona" aria-labelledby="decision-title">
           <div className="container decision-layout">
             <Reveal className="decision-intro">
-              <Kicker index="01">O gap de adoção</Kicker>
+              <Kicker index="02">O gap de adoção</Kicker>
               <h2 id="decision-title" className="section-title">
                 Comprar IA foi a parte fácil.
                 <span>Fazer o trabalho mudar é a transformação.</span>
@@ -80,7 +106,7 @@ export default function App() {
           <div className="container">
             <Reveal className="programs-head">
               <div>
-                <Kicker index="02">Programas</Kicker>
+                <Kicker index="03">Programas</Kicker>
                 <h2 id="programs-title" className="section-title">Um caminho para cada nível de maturidade.</h2>
               </div>
               <p className="section-copy">Da primeira adoção à formação de pessoas capazes de construir soluções internas com IA.</p>
@@ -98,6 +124,9 @@ export default function App() {
                   <div className="program-card-top">
                     <span className="program-number">0{index + 1}</span>
                     <span className="program-name">{program.name}</span>
+                  </div>
+                  <div className={`program-visual program-visual--${index + 1}`} aria-hidden="true">
+                    <span /><span /><span /><i />
                   </div>
                   <h3>{program.title}</h3>
                   <p>{program.body}</p>
@@ -121,7 +150,7 @@ export default function App() {
         <section className="tailored-section" aria-labelledby="tailored-title">
           <div className="container tailored-grid">
             <Reveal className="tailored-copy">
-              <Kicker index="03">{TAILORED.eyebrow}</Kicker>
+              <Kicker index="04">{TAILORED.eyebrow}</Kicker>
               <h2 id="tailored-title" className="section-title">
                 {TAILORED.headline[0]}<span>{TAILORED.headline[1]}</span>
               </h2>
@@ -154,27 +183,6 @@ export default function App() {
                 <span>0{index + 1}</span><h3>{title}</h3><p>{body}</p>
               </Reveal>
             ))}
-          </div>
-        </section>
-
-        <section className="practitioners-section" id="autoridade" aria-labelledby="practitioners-title">
-          <div className="container practitioners-grid-v2">
-            <Reveal as="figure" className="practitioners-image">
-              <img src="/brand/executive-workshop.jpg" alt="Equipe reunida em um workshop executivo colaborativo" loading="lazy" decoding="async" />
-              <figcaption><span>Presença humana</span>Capacitação ao vivo, aplicada ao contexto da empresa.</figcaption>
-            </Reveal>
-
-            <Reveal className="practitioners-copy" order={1}>
-              <Kicker index="04">{PRACTITIONERS.eyebrow}</Kicker>
-              <h2 id="practitioners-title" className="section-title">Quem ensina também implementa.</h2>
-              <p className="practitioners-statement">{PRACTITIONERS.statement}</p>
-              <p>{PRACTITIONERS.body}</p>
-              <dl className="practitioner-stats">
-                <div><dt><CountUp value="45+" /></dt><dd>empresas atendidas</dd></div>
-                <div><dt><CountUp value="230+" /></dt><dd>projetos entregues</dd></div>
-              </dl>
-              <blockquote>“Não começamos perguntando quais funcionalidades ensinar. Começamos perguntando como o trabalho deveria funcionar com IA.”</blockquote>
-            </Reveal>
           </div>
         </section>
 

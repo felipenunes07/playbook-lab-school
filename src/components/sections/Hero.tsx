@@ -81,23 +81,33 @@ export function Hero() {
               </button>
             ))}
           </div>
-        </div>
 
-        <div className="container hero-outcomes" aria-label="Da licença ao resultado">
-          <div>
-            <span>01</span>
-            <strong>Acesso</strong>
-            <p>As ferramentas já estão contratadas.</p>
-          </div>
-          <div>
-            <span>02</span>
-            <strong>Capacitação</strong>
-            <p>O time aprende sobre o próprio trabalho.</p>
-          </div>
-          <div>
-            <span>03</span>
-            <strong>ROI</strong>
-            <p>Novos workflows entram em operação.</p>
+          <div className="hero-dossier" aria-label="Estrutura do programa in-company">
+            <div className="hero-dossier-head">
+              <span>PL / PROGRAMA IN-COMPANY</span>
+              <strong><i aria-hidden="true" /> Mandato de transformação</strong>
+              <span>CONFIDENCIAL / 01</span>
+            </div>
+            <div className="hero-dossier-grid">
+              <article>
+                <span>01 / DIAGNÓSTICO</span>
+                <strong>Onde a IA muda o trabalho</strong>
+                <p>Ferramentas, processos e oportunidades priorizadas.</p>
+              </article>
+              <article>
+                <span>02 / CAPACITAÇÃO</span>
+                <strong>Aprendizado sobre casos reais</strong>
+                <p>Sessões construídas com o contexto da sua equipe.</p>
+              </article>
+              <article>
+                <span>03 / IMPLEMENTAÇÃO</span>
+                <strong>Capacidade em operação</strong>
+                <p>Skills, workflows e agentes que continuam em uso.</p>
+              </article>
+            </div>
+            <div className="hero-dossier-foot" aria-hidden="true">
+              <span>SUA OPERAÇÃO</span><i>→</i><span>CAPACIDADE INSTALADA</span><i>→</i><strong>ROI</strong>
+            </div>
           </div>
         </div>
 
