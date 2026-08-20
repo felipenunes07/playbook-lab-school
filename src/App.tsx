@@ -125,19 +125,26 @@ export default function App() {
                     <span className="program-number">0{index + 1}</span>
                     <span className="program-name">{program.name}</span>
                   </div>
-                  <div className={`program-visual program-visual--${index + 1}`} aria-hidden="true">
-                    <span /><span /><span /><i />
+                  <div className={`program-visual program-visual--${index + 1}`} aria-label={`Progressão do programa ${program.name}`}>
+                    <div className="program-visual-head">
+                      <span>Mapa de capacidade</span>
+                      <strong>{program.name}</strong>
+                    </div>
+                    <div className="program-visual-path">
+                      {program.flow.map((step, stepIndex) => (
+                        <div key={step}>
+                          <span>0{stepIndex + 1}</span>
+                          <strong>{step}</strong>
+                          {stepIndex < program.flow.length - 1 ? <i aria-hidden="true">→</i> : null}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <h3>{program.title}</h3>
                   <p>{program.body}</p>
                   <ul className="program-tags" aria-label="Tópicos do programa">
                     {program.tags.map((tag) => <li key={tag}>{tag}</li>)}
                   </ul>
-                  <div className="program-flow" aria-label="Progressão do programa">
-                    {program.flow.map((step, stepIndex) => (
-                      <span key={step}>{step}{stepIndex < program.flow.length - 1 ? <i aria-hidden="true">→</i> : null}</span>
-                    ))}
-                  </div>
                   <a href={CONTACT_URL} target="_blank" rel="noopener noreferrer" className="program-cta">
                     {program.cta} <Arrow />
                   </a>
