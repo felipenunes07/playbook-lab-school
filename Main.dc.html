@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; background: #0a0a0b; }
+    a { color: #c8933f; text-decoration: none; }
+    a:hover { color: #ddaa55; }
+  </style>
+</helmet>
+
+<!-- NOTURNO: nenhuma superfície clara. Luz vem de um único ponto quente. -->
+<div style="width: 1280px; height: 720px; box-sizing: border-box; position: relative; overflow: hidden; background: #0a0a0b; font-family: Archivo, system-ui, sans-serif;">
+
+  <div style="position: absolute; top: -280px; left: 42%; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(200, 147, 63, 0.16) 0%, rgba(200, 147, 63, 0.05) 42%, transparent 68%);"></div>
+
+  <div style="position: relative; height: 100%; box-sizing: border-box; padding: 60px 64px 52px; display: flex; flex-direction: column;">
+
+    <div style="display: flex; align-items: baseline; justify-content: space-between;">
+      <span style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #c8933f;">Programa corporativo</span>
+      <span style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(237, 234, 228, 0.34);">Playbook Lab</span>
+    </div>
+
+    <div style="flex-grow: 1;"></div>
+
+    <h1 style="margin: 0; max-width: 15ch; font-size: 78px; font-weight: 400; line-height: 1.05; letter-spacing: -0.03em; color: #edeae4;">
+      Você contratou <span style="color: {{toolColor}};">{{toolName}}</span> para sua equipe.
+    </h1>
+
+    <p style="margin: 30px 0 0; max-width: 30ch; font-size: 30px; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: #c8933f;">Agora transforme isso em ROI.</p>
+
+    <div style="flex-grow: 1;"></div>
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 56px; padding-top: 34px; border-top: 1px solid rgba(237, 234, 228, 0.14);">
+      <p style="margin: 0; max-width: 46ch; font-size: 16px; line-height: 1.7; color: rgba(237, 234, 228, 0.62); text-wrap: pretty;">Treinamento prático de IA, conduzido por quem implementa e construído sobre as ferramentas e processos reais da sua empresa.</p>
+      <span style="flex-shrink: 0; display: inline-flex; align-items: center; height: 56px; padding: 0 34px; border: 1px solid #c8933f; color: #c8933f; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;">Falar com a Playbook</span>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"tool":{"editor":"enum","options":["Claude","ChatGPT","Gemini"],"default":"Claude","section":"Conteúdo"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tool = this.props.tool ?? 'Claude';
+    // Sobre fundo escuro as cores de marca precisam clarear, não escurecer.
+    const colors = { Claude: '#e0a184', ChatGPT: '#4fc79f', Gemini: '#7aa9f7' };
+    return { toolName: tool, toolColor: colors[tool] ?? colors.Claude };
+  }
+}
+</script>
+</body>
+</html>

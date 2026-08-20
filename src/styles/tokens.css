@@ -1,0 +1,171 @@
+/* ============================================================
+   AI ENABLEMENT — sistema visual próprio desta oferta.
+
+   Direção: editorial tech / operator. Base creme quente, grafite
+   pesado como estrutura, vermelhão-sinal como única cor de acento.
+
+   Deliberadamente NÃO herda a identidade institucional da Playbook
+   Lab (verde #14C114, Syne, Poppins): esta é uma oferta com sistema
+   visual próprio. A marca aparece pelo logo e pela autoridade, não
+   pela paleta.
+
+   Do 9x vêm as proporções, medidas a 1280px na página renderizada:
+   container 1184 + gutters 48, bandas de 80px, título de card 24/1.2,
+   coluna curta 16/600 + 13/1.5, eyebrow mono 12 maiúsculo, cards
+   raio 12 + borda 1px sem sombra pesada. A escala de display é bem
+   maior que a do 9x — é o que dá o impacto pedido.
+   ============================================================ */
+
+/* ---------- display: Archivo ----------
+   Revertido do Bodoni Moda por decisão do cliente: a serifa de alto
+   contraste foi rejeitada no teste que importa — o olho dele. Archivo
+   500/600/700 é o que estava aprovado. */
+@font-face {
+  font-family: Archivo;
+  src: url("/fonts/Archivo-500-normal-latin.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Archivo;
+  src: url("/fonts/Archivo-500-normal-latin-ext.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Archivo;
+  src: url("/fonts/Archivo-600-normal-latin.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Archivo;
+  src: url("/fonts/Archivo-600-normal-latin-ext.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Archivo;
+  src: url("/fonts/Archivo-700-normal-latin.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Archivo;
+  src: url("/fonts/Archivo-700-normal-latin-ext.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- corpo: Inter ---------- */
+@font-face {
+  font-family: Inter;
+  src: url("/fonts/Inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Inter;
+  src: url("/fonts/Inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Inter;
+  src: url("/fonts/Inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  /* --- superfícies ---------------------------------------------
+     Medido no go9x: base #FFFDF9 (L*99 — mais branco que o cinza-frio
+     que eu tinha), branco puro para as bandas de conteúdo, e UMA banda
+     escura por página. O calor é imperceptível (b* ~+1,5); tanto o
+     creme #f3f0e8 quanto o cinza-frio #f8f9fb eram exageros meus em
+     direções opostas. */
+  --paper: #fffdf9;
+  --paper-pure: #ffffff;
+  --stone: #f4f2ec;
+  --stone-line: #dbd8c8;
+  --ink-deep: #101418;
+  --ink-raised: #1a1f26;
+
+  /* --- tinta --------------------------------------------------- */
+  --ink: #151a20;
+  --ink-soft: #3f4b5d;
+  --muted: #657081;
+  --faint: #6c7686;
+  --on-dark: #fffdf9;
+  --on-dark-muted: rgba(255, 253, 249, 0.7);
+  --on-dark-line: rgba(255, 253, 249, 0.14);
+
+  /* --- linhas -------------------------------------------------- */
+  --line: #e7e4d9;
+  --line-strong: #dbd8c8;
+
+  /* --- acento --------------------------------------------------
+     Terracota. Usada como o 9x usa: quase nunca. */
+  --accent: #b8502a;
+  --accent-deep: #98401f;
+
+  /* --- raio / borda -------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* Sombra de card medida no go9x: presente mas quase invisível. */
+  --shadow-card: 0 8px 24px rgba(21, 26, 32, 0.05);
+
+  /* --- layout -------------------------------------------------- */
+  --container: 1184px;
+  --gutter: clamp(20px, 3.75vw, 48px);
+  --measure: 700px;
+
+  /* --- ritmo vertical ------------------------------------------
+     80px, o valor do 9x. Eu tinha inflado para 187px chamando de
+     "premium" — o resultado foi uma página frouxa, não caro. */
+  --band: clamp(56px, 6vw, 80px);
+  --band-lg: clamp(64px, 6.6vw, 88px);
+  --band-xl: clamp(72px, 7.4vw, 100px);
+  --stack: clamp(36px, 3.8vw, 50px);
+
+  /* --- tipografia ----------------------------------------------
+     Escala do 9x: h1 64/64, h2 50/50, ambos com ls -2px; h3 24/28.8
+     ls -0.6px; corpo 16/22.4. Nada infla. */
+  --font-display: Archivo, Inter, -apple-system, Arial, sans-serif;
+  --font-title: Inter, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-body: Inter, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-label: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+  --font-mono: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+
+  --fs-display: clamp(38px, 4.6vw, 64px); /* h1 */
+  --fs-h2: clamp(32px, 3.7vw, 50px);
+  --fs-h3: clamp(20px, 1.8vw, 24px);
+  --fs-statement: clamp(28px, 3.2vw, 42px);
+  --fs-stat: clamp(38px, 4.6vw, 64px);
+  --fs-lead: clamp(16px, 1.3vw, 20px);
+  --fs-body: 16px;
+  --fs-sm: 15px;
+  --fs-xs: 13px;
+  --fs-eyebrow: 12px;
+
+  --lh-display: 1.0;
+  --lh-h3: 1.2;
+  --lh-body: 1.4;
+
+  --ls-display: -0.031em; /* -2px em 64px */
+  --ls-h3: -0.025em;      /* -0.6px em 24px */
+  --ls-eyebrow: 0.055em;  /* 0.6px em 11px — muito mais fechado que eu usava */
+
+  /* --- motion --------------------------------------------------- */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 0.55s;
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&display=swap">
+  <style>
+    body { margin: 0; background: #0d1117; }
+    a { color: #7ee0b8; text-decoration: none; }
+    a:hover { color: #a8f0d4; }
+  </style>
+</helmet>
+
+<!-- TERMINAL: monospace como voz PRINCIPAL, não como label. Sala de
+     operações, não sala de aula — encosta direto na tese practitioner. -->
+<div style="width: 1280px; height: 720px; box-sizing: border-box; background: #0d1117; font-family: 'SFMono-Regular', Consolas, monospace; color: #d7dde5; display: grid; grid-template-rows: 44px minmax(0, 1fr) 96px;">
+
+  <div style="display: flex; align-items: center; gap: 26px; padding: 0 30px; border-bottom: 1px solid rgba(215, 221, 229, 0.14); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(215, 221, 229, 0.5);">
+    <span style="color: #7ee0b8;">● operando</span>
+    <span>playbook lab</span>
+    <span>ai enablement</span>
+    <span style="margin-left: auto;">45 empresas · 230 projetos</span>
+  </div>
+
+  <div style="box-sizing: border-box; padding: 46px 30px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px;">
+
+    <div style="display: flex; flex-direction: column;">
+      <span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(215, 221, 229, 0.42);">estado atual</span>
+
+      <h1 style="margin: 20px 0 0; font-family: Archivo, system-ui, sans-serif; font-size: 56px; font-weight: 500; line-height: 1.08; letter-spacing: -0.028em; color: #f0f4f8;">
+        Você contratou <span style="color: {{toolColor}};">{{toolName}}</span> para sua equipe.
+      </h1>
+
+      <div style="flex-grow: 1;"></div>
+
+      <div style="display: flex; align-items: baseline; gap: 14px; padding: 22px 0; border-top: 1px solid rgba(215, 221, 229, 0.14);">
+        <span style="font-size: 15px; color: #7ee0b8;">&gt;</span>
+        <span style="font-family: Archivo, system-ui, sans-serif; font-size: 30px; font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; color: #7ee0b8;">Agora transforme isso em ROI.</span>
+      </div>
+
+      <p style="margin: 0; max-width: 58ch; font-family: Archivo, system-ui, sans-serif; font-size: 16px; line-height: 1.65; color: rgba(215, 221, 229, 0.62); text-wrap: pretty;">Treinamento prático conduzido por quem implementa — construído sobre as ferramentas e processos reais da sua operação.</p>
+    </div>
+
+    <div style="border: 1px solid rgba(215, 221, 229, 0.14); display: flex; flex-direction: column;">
+      <div style="padding: 13px 18px; border-bottom: 1px solid rgba(215, 221, 229, 0.14); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(215, 221, 229, 0.5);">onde a ferramenta entra</div>
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 15px 18px; border-bottom: 1px solid rgba(215, 221, 229, 0.08); font-size: 13px;">
+          <span style="color: #d7dde5;">{{r.proc}}</span>
+          <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: {{r.tone}};">{{r.state}}</span>
+        </div>
+      </sc-for>
+      <div style="flex-grow: 1;"></div>
+      <div style="padding: 15px 18px; border-top: 1px solid rgba(215, 221, 229, 0.14); font-size: 12px; letter-spacing: 0.08em; color: rgba(215, 221, 229, 0.5);">4 de 4 processos mapeáveis</div>
+    </div>
+
+  </div>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; border-top: 1px solid rgba(215, 221, 229, 0.14);">
+    <div style="display: flex; align-items: center; padding: 0 30px; font-size: 12px; letter-spacing: 0.1em; color: rgba(215, 221, 229, 0.42);">desenhamos o programa junto com sua equipe</div>
+    <div style="display: flex; align-items: center; justify-content: center; background: #7ee0b8; color: #0d1117; font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;">Falar com a Playbook</div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"tool":{"editor":"enum","options":["Claude","ChatGPT","Gemini"],"default":"Claude","section":"Conteúdo"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tool = this.props.tool ?? 'Claude';
+    const colors = { Claude: '#e0a184', ChatGPT: '#4fc79f', Gemini: '#8fbaff' };
+    return {
+      toolName: tool,
+      toolColor: colors[tool] ?? colors.Claude,
+      rows: [
+        { proc: 'Proposta comercial', state: 'manual', tone: 'rgba(215, 221, 229, 0.42)' },
+        { proc: 'Pipeline no CRM', state: 'manual', tone: 'rgba(215, 221, 229, 0.42)' },
+        { proc: 'Pesquisa de conta', state: 'parcial', tone: '#e0a184' },
+        { proc: 'Relatório mensal', state: 'workflow', tone: '#7ee0b8' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

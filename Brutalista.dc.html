@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&display=swap">
+  <style>
+    body { margin: 0; background: #f2efe6; }
+    a { color: #16181d; text-decoration: none; }
+    a:hover { color: #d8402f; }
+  </style>
+</helmet>
+
+<!-- BRUTALISTA: grade pesada visível, blocos chapados, zero radius,
+     zero sombra. Claro, mas o oposto de minimalista. -->
+<div style="width: 1280px; height: 720px; box-sizing: border-box; background: #f2efe6; font-family: Archivo, system-ui, sans-serif; color: #16181d; display: grid; grid-template-rows: 62px minmax(0, 1fr) 168px; border: 3px solid #16181d;">
+
+  <div style="display: grid; grid-template-columns: 320px minmax(0, 1fr) 260px; border-bottom: 3px solid #16181d;">
+    <div style="display: flex; align-items: center; padding: 0 20px; border-right: 3px solid #16181d; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;">Playbook Lab</div>
+    <div style="display: flex; align-items: center; padding: 0 20px; border-right: 3px solid #16181d; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #5e626b;">AI enablement para empresas</div>
+    <div style="display: flex; align-items: center; justify-content: center; background: #d8402f; color: #f2efe6; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;">Programa 2026</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) 260px;">
+    <div style="box-sizing: border-box; padding: 40px 24px 32px; border-right: 3px solid #16181d; display: flex; flex-direction: column;">
+      <h1 style="margin: 0; font-size: 104px; font-weight: 700; line-height: 0.9; letter-spacing: -0.045em; text-transform: uppercase;">
+        <span style="display: block;">Você</span>
+        <span style="display: block;">contratou</span>
+        <span style="display: block; background: {{toolBg}}; color: #f2efe6; padding: 0 12px; margin-left: -12px; width: fit-content;">{{toolName}}</span>
+      </h1>
+      <div style="flex-grow: 1;"></div>
+      <p style="margin: 0; font-size: 30px; font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; text-transform: uppercase;">Agora transforme<br>isso em ROI.</p>
+    </div>
+
+    <div style="display: grid; grid-template-rows: repeat(3, minmax(0, 1fr));">
+      <sc-for list="{{cells}}" as="c" hint-placeholder-count="3">
+        <div style="box-sizing: border-box; padding: 18px 20px; border-bottom: 3px solid #16181d; display: flex; flex-direction: column; justify-content: center; gap: 6px;">
+          <span style="font-size: 40px; font-weight: 700; line-height: 0.92; letter-spacing: -0.04em;">{{c.n}}</span>
+          <span style="font-family: 'SFMono-Regular', Consolas, monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #5e626b;">{{c.label}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; border-top: 3px solid #16181d;">
+    <div style="box-sizing: border-box; padding: 26px 24px; border-right: 3px solid #16181d;">
+      <p style="margin: 0; max-width: 60ch; font-size: 17px; line-height: 1.6; color: #3b3f47;">Treinamento prático de IA, conduzido por quem implementa e construído sobre as ferramentas, processos e casos reais da sua empresa.</p>
+    </div>
+    <div style="background: #16181d; color: #f2efe6; display: flex; align-items: center; justify-content: center; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 15px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">Falar com a Playbook →</div>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"tool":{"editor":"enum","options":["Claude","ChatGPT","Gemini"],"default":"Claude","section":"Conteúdo"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tool = this.props.tool ?? 'Claude';
+    // Bloco chapado: a cor é fundo, então usa o tom cheio da marca.
+    const bg = { Claude: '#c15f33', ChatGPT: '#0b6b51', Gemini: '#1b57c4' };
+    return {
+      toolName: tool,
+      toolBg: bg[tool] ?? bg.Claude,
+      cells: [
+        { n: '45+', label: 'Empresas atendidas' },
+        { n: '230+', label: 'Projetos entregues' },
+        { n: '03', label: 'Trilhas por maturidade' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

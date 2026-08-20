@@ -1,0 +1,46 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "1 · Noturno", "x": 0, "y": 0, "w": 1280, "h": 720 },
+    { "file": "Institucional.dc.html", "title": "2 · Institucional", "x": 1400, "y": 0, "w": 1280, "h": 720 },
+    { "file": "Brutalista.dc.html", "title": "3 · Brutalista", "x": 0, "y": 880, "w": 1280, "h": 720 },
+    { "file": "Terminal.dc.html", "title": "4 · Terminal", "x": 1400, "y": 880, "w": 1280, "h": 720 }
+  ],
+  "annotations": [
+    {
+      "id": "leia-primeiro",
+      "x": 0,
+      "y": -250,
+      "w": 700,
+      "text": "As quatro anteriores eram a mesma ideia com o layout mexido — você estava certo. Todas eram fundo quase branco + headline grande + botão escuro.\n\nEstas quatro são PARADIGMAS diferentes: fundo, cor, escala e textura mudam. Três delas nem são claras.\n\nMesma copy e mesma tipografia (Archivo + mono), porque isso você já decidiu. Aponta a que te interessa — ou diz qual está mais perto e o que puxar dela."
+    },
+    {
+      "id": "nota-1",
+      "x": 0,
+      "y": 770,
+      "w": 420,
+      "text": "1 · NOTURNO\nPreto absoluto, um único foco de luz âmbar, nenhuma superfície clara.\nRegistro: private equity, convite fechado, exclusividade.\nRisco: escuro demais para uma página que precisa vender clareza."
+    },
+    {
+      "id": "nota-2",
+      "x": 1400,
+      "y": 770,
+      "w": 420,
+      "text": "2 · INSTITUCIONAL\nAzul-tinta saturado ocupando 100% da tela. Nada de neutro.\nRegistro: banco de investimento, consultoria grande, confiança corporativa.\nRisco: azul corporativo é território disputado — pode ler genérico."
+    },
+    {
+      "id": "nota-3",
+      "x": 0,
+      "y": 1650,
+      "w": 420,
+      "text": "3 · BRUTALISTA\nGrade de 3px visível, blocos chapados, caixa-alta gigante, zero radius, zero sombra.\nRegistro: pôster suíço, Vignelli. É claro mas é o oposto de minimalista.\nRisco: ousado — divide opinião. É a mais memorável das quatro."
+    },
+    {
+      "id": "nota-4",
+      "x": 1400,
+      "y": 1650,
+      "w": 420,
+      "text": "4 · TERMINAL\nMonospace como voz principal, painel de processos com estado, verde de operação.\nRegistro: sala de operações. Encosta direto na tese \"quem ensina também implementa\".\nRisco: pode ler técnico demais para um comprador executivo."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}
