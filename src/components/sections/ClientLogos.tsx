@@ -30,15 +30,6 @@ export function ClientLogos() {
             </li>
           ))}
         </ul>
-
-        <dl className="clients-stats">
-          {PROOF.stats.map((stat) => (
-            <div key={stat.value}>
-              <dt>{stat.value}</dt>
-              <dd>{stat.label}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );
