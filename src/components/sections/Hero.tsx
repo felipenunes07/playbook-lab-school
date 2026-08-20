@@ -1,26 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/Button";
-import { TOOLS } from "../ui/ToolMark";
-import { WorkSurfaces } from "../art/WorkSurfaces";
+import { ToolMark, TOOLS } from "../ui/ToolMark";
 import { CTA, CONTACT_URL, HERO } from "../../data/site";
 
 const ROTATE_MS = 3400;
 
-/**
- * Primeira dobra: só tipografia. O painel-artefato que ficava à direita
- * foi removido — lia como caixa de software, e uma caixa de UI ao lado da
- * headline é exatamente o que faz uma oferta de alto ticket parecer
- * produto. O que sustenta a dobra agora é escala, silêncio e o nome da
- * ferramenta que o visitante já contratou.
- *
- * A ferramenta aparece como nome na cor da marca com um sublinhado
- * fino, não como chip com borda e fundo — o chip lia como adesivo
- * promocional.
- *
- * A rotação para em `prefers-reduced-motion` e com a aba oculta. Toda a
- * headline visual é aria-hidden; leitores de tela recebem uma única
- * versão linear.
- */
 export function Hero() {
   const [index, setIndex] = useState(0);
   const tool = TOOLS[index];
@@ -35,41 +19,76 @@ export function Hero() {
 
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <div className="container hero-inner">
-        <p className="eyebrow hero-eyebrow">{HERO.eyebrow}</p>
+      <div className="hero-shell">
+        <div className="container hero-inner">
+          <p className="eyebrow hero-eyebrow">
+            <span className="hero-eyebrow-dot" aria-hidden="true" />
+            {HERO.eyebrow}
+          </p>
 
-        <h1 id="hero-title" className="display hero-title">
-          <span className="visually-hidden">{HERO.headlineA11y}</span>
-          <span aria-hidden="true">
-            <span className="hero-line">
-              {HERO.headlineBefore}{" "}
-              <span
-                className="tool-name"
-                style={{ ["--tool" as string]: tool.colorInk }}
-              >
-                <span key={tool.id}>{tool.label}</span>
+          <h1 id="hero-title" className="display hero-title">
+            <span className="visually-hidden">{HERO.headlineA11y}</span>
+            <span aria-hidden="true">
+              <span className="hero-line hero-line--tool">
+                {HERO.headlineBefore}{" "}
+                <span
+                  className="tool-chip"
+                  style={{ ["--tool" as string]: tool.colorInk }}
+                >
+                  <ToolMark tool={tool.id} size={30} />
+                  <span key={tool.id}>{tool.label}</span>
+                </span>
               </span>
+              <span className="hero-line">{HERO.headlineAfter}</span>
+              <span className="hero-line hero-line--payoff">{HERO.headlineRoi}</span>
             </span>
-            <span className="hero-line">{HERO.headlineAfter}</span>
-            <span className="hero-line hero-line--payoff">{HERO.headlineRoi}</span>
-          </span>
-        </h1>
+          </h1>
 
-        <div className="hero-base">
-          <div className="hero-copy">
-            <p className="lead hero-sub">{HERO.subheadline}</p>
-            <div className="hero-actions">
-              <Button href={CONTACT_URL} variant="primary">
-                {CTA.primary}
-              </Button>
-              <Button href="#programas" variant="secondary">
-                {CTA.secondary}
-              </Button>
-            </div>
-            <p className="hero-micro">{HERO.microcopy}</p>
+          <p className="lead hero-sub">{HERO.subheadline}</p>
+
+          <div className="hero-actions">
+            <Button href={CONTACT_URL} variant="primary">
+              {CTA.primary}
+            </Button>
+            <Button href="#programas" variant="secondary">
+              {CTA.secondary}
+            </Button>
           </div>
+          <p className="hero-micro">{HERO.microcopy}</p>
 
-          <WorkSurfaces tool={tool.id} toolColor={tool.color} />
+          <div className="hero-tool-rail" aria-label="Ferramentas compatíveis">
+            {TOOLS.map((item, itemIndex) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`hero-tool ${itemIndex === index ? "is-active" : ""}`}
+                onClick={() => setIndex(itemIndex)}
+                aria-pressed={itemIndex === index}
+                style={{ ["--tool" as string]: item.colorInk }}
+              >
+                <ToolMark tool={item.id} size={18} />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="container hero-outcomes" aria-label="Da licença ao resultado">
+          <div>
+            <span>01</span>
+            <strong>Acesso</strong>
+            <p>As ferramentas já estão contratadas.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <strong>Capacitação</strong>
+            <p>O time aprende sobre o próprio trabalho.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <strong>ROI</strong>
+            <p>Novos workflows entram em operação.</p>
+          </div>
         </div>
       </div>
     </section>

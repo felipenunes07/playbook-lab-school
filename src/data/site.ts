@@ -38,8 +38,8 @@ export const CTA = {
 export const NAV_LINKS = [
   { label: "Programas", href: "#programas" },
   { label: "Como funciona", href: "#como-funciona" },
-  { label: "Clientes", href: "#autoridade" },
-  { label: "Recursos", href: "#recursos" },
+  { label: "Quem conduz", href: "#autoridade" },
+  { label: "O que fica", href: "#entregaveis" },
 ] as const;
 
 /* ---------- hero ----------
