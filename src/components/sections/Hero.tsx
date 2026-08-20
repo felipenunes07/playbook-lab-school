@@ -5,6 +5,12 @@ import { CTA, CONTACT_URL, HERO } from "../../data/site";
 
 const ROTATE_MS = 3400;
 
+const APPLICATIONS = [
+  { area: "Operações", from: "Tarefa manual", to: "Workflow com IA" },
+  { area: "Conhecimento", from: "Documentos dispersos", to: "Contexto consultável" },
+  { area: "Times comerciais", from: "Informação solta", to: "Decisão assistida" },
+] as const;
+
 export function Hero() {
   const [index, setIndex] = useState(0);
   const tool = TOOLS[index];
@@ -88,6 +94,21 @@ export function Hero() {
             <span>03</span>
             <strong>ROI</strong>
             <p>Novos workflows entram em operação.</p>
+          </div>
+        </div>
+
+        <div className="container application-strip">
+          <span className="visually-hidden">Exemplos de aplicação: tarefa manual em workflow com IA, documentos dispersos em contexto consultável e informação solta em decisão assistida.</span>
+          <p aria-hidden="true">Exemplos de aplicação</p>
+          <div className="application-live" key={APPLICATIONS[index].area} aria-hidden="true">
+            <span>{APPLICATIONS[index].area}</span>
+            <strong>{APPLICATIONS[index].from}</strong>
+            <i>→</i>
+            <strong>{APPLICATIONS[index].to}</strong>
+          </div>
+          <div className="application-tool" aria-hidden="true" style={{ ["--tool" as string]: tool.colorInk }}>
+            <ToolMark tool={tool.id} size={17} />
+            <span>{tool.label} em contexto</span>
           </div>
         </div>
       </div>

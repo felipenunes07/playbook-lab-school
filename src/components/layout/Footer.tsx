@@ -16,7 +16,7 @@ export function Footer() {
               loading="lazy"
             />
           </a>
-          <p>AI enablement para empresas.</p>
+          <p>Capacitação e implementação de IA para empresas.</p>
         </div>
 
         <div className="footer-columns">

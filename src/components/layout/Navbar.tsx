@@ -34,13 +34,13 @@ export function Navbar() {
       <div className="container header-inner">
         <a href={LINKS.site} className="brand" aria-label="Playbook Lab — página inicial">
           <img
-            src="/brand/playbooklab-logo.svg"
+            src="/brand/playbooklab-logo-light.svg"
             alt="Playbook Lab"
             width={44}
             height={37}
             className="brand-mark"
           />
-          <span className="brand-offer">AI Enablement</span>
+          <span className="brand-offer">IA para empresas</span>
         </a>
 
         <nav className="nav-center" aria-label="Navegação principal">

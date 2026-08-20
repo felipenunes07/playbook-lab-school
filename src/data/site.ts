@@ -50,7 +50,7 @@ export const NAV_LINKS = [
    C "Sua equipe já tem [x]." / "Agora faça ela trabalhar diferente."
    D "Você já investiu em [x]." / "Agora coloque esse investimento para trabalhar." */
 export const HERO = {
-  eyebrow: "AI enablement para empresas",
+  eyebrow: "IA aplicada ao trabalho real",
   headlineBefore: "Você contratou",
   headlineAfter: "para sua equipe.",
   headlineRoi: "Agora transforme isso em ROI.",
@@ -262,7 +262,7 @@ export const TESTIMONIALS: Testimonial[] = [];
 /* ---------- final CTA ---------- */
 export const FINAL_CTA = {
   headline: "Coloque suas ferramentas de IA para trabalhar.",
-  lead: "Vamos entender sua equipe, seus processos e onde um programa de AI Enablement pode gerar mais impacto.",
+  lead: "Vamos entender sua equipe, seus processos e onde um programa de capacitação e implementação de IA pode gerar mais impacto.",
   microcopy: "Começamos entendendo sua operação.",
 } as const;
 
@@ -343,7 +343,7 @@ export const FALSE_BELIEFS = {
 export const DELIVERABLES = {
   eyebrow: "O que fica",
   headline: ["Seu time aprende.", "Sua empresa fica com o que foi construído."],
-  lead: "Um programa de AI Enablement não termina em certificado. Termina em capacidade instalada e em ativos que continuam sendo usados.",
+  lead: "Um programa de IA aplicada não termina em certificado. Termina em capacidade instalada e em ativos que continuam sendo usados.",
   columns: [
     {
       kind: "Pessoas",
