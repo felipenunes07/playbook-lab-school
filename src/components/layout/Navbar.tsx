@@ -4,11 +4,16 @@ import { CTA, CONTACT_URL, LINKS, NAV_LINKS } from "../../data/site";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const available = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(available > 0 ? Math.min(window.scrollY / available, 1) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -31,6 +36,7 @@ export function Navbar() {
 
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+      <span className="site-progress" aria-hidden="true" style={{ transform: `scaleX(${progress})` }} />
       <div className="container header-inner">
         <a href={LINKS.site} className="brand" aria-label="Playbook Lab — página inicial">
           <img

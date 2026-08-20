@@ -27,6 +27,10 @@ export function Hero() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-shell">
         <div className="container hero-inner">
+          <div className="hero-atmosphere" aria-hidden="true">
+            <span className="hero-orbit hero-orbit--outer"><i /><i /><i /></span>
+            <span className="hero-orbit hero-orbit--inner"><i /><i /></span>
+          </div>
           <p className="eyebrow hero-eyebrow">
             <span className="hero-eyebrow-dot" aria-hidden="true" />
             {HERO.eyebrow}

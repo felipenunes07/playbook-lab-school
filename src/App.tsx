@@ -6,6 +6,7 @@ import { ClientLogos } from "./components/sections/ClientLogos";
 import { Button, Arrow } from "./components/ui/Button";
 import { Reveal } from "./components/ui/Reveal";
 import { ToolMark, TOOLS } from "./components/ui/ToolMark";
+import { CountUp } from "./components/ui/CountUp";
 import {
   ADOPTION_GAP,
   CONTACT_URL,
@@ -169,8 +170,8 @@ export default function App() {
               <p className="practitioners-statement">{PRACTITIONERS.statement}</p>
               <p>{PRACTITIONERS.body}</p>
               <dl className="practitioner-stats">
-                <div><dt>45+</dt><dd>empresas atendidas</dd></div>
-                <div><dt>230+</dt><dd>projetos entregues</dd></div>
+                <div><dt><CountUp value="45+" /></dt><dd>empresas atendidas</dd></div>
+                <div><dt><CountUp value="230+" /></dt><dd>projetos entregues</dd></div>
               </dl>
               <blockquote>“Não começamos perguntando quais funcionalidades ensinar. Começamos perguntando como o trabalho deveria funcionar com IA.”</blockquote>
             </Reveal>

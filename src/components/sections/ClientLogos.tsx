@@ -1,4 +1,5 @@
 import { CLIENT_LOGOS, PROOF } from "../../data/site";
+import { CountUp } from "../ui/CountUp";
 
 function LogoList({ duplicate = false }: { duplicate?: boolean }) {
   return (
@@ -33,7 +34,7 @@ export function ClientLogos() {
         <dl className="clients-stats">
           {PROOF.stats.map((stat) => (
             <div key={stat.value}>
-              <dt>{stat.value}</dt>
+              <dt><CountUp value={stat.value} /></dt>
               <dd>{stat.label}</dd>
             </div>
           ))}
