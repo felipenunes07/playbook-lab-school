@@ -1,20 +1,36 @@
 /* ============================================================
-   AI ENABLEMENT — sistema visual próprio desta oferta.
+   PLAYBOOK LAB · TREINAMENTO CORPORATIVO DE IA
+   Sistema visual: registro Stripe, cor de marca Playbook.
 
-   Direção: editorial tech / operator. Base creme quente, grafite
-   pesado como estrutura, vermelhão-sinal como única cor de acento.
+   Definido na call de 24/08 com o Victor. As regras vieram
+   literalmente do que ele apontou na tela:
 
-   Deliberadamente NÃO herda a identidade institucional da Playbook
-   Lab (verde #14C114, Syne, Poppins): esta é uma oferta com sistema
-   visual próprio. A marca aparece pelo logo e pela autoridade, não
-   pela paleta.
+   · "tem título, subtítulo, botõezinhos, empresas passando.
+      Legal, bem isso"  → fórmula do hero
+   · "poderia ter título, subtítulo, daí uma frase de duas, três
+      linhas, MENOR. E daí algumas caixinhas falando de coisas,
+      item 1, 2, 3, 4. Bem bonito"  → fórmula de toda seção
+   · "muito muito grande, em exagero. Deixar pouquinho mais
+      curto, fonte menor"  → h1 a 60px, não 90px
+   · "aqui tem espaço gigantesco. Aproveitar melhor o
+      espaçamento"  → bandas de 96px, não 168px
+   · "acho que passando é mais legal, deixa mais fininha essa
+      linha"  → marquee de logos volta, faixa fina
+   · "essas caixinhas com ícones é coisa de IA... não parece web
+      codado"  → caixinha é texto, nunca ícone
+   · "se [o efeito de fundo] não fizer parte da identidade
+      visual ou não agregar, eu também nem quero"  → o único
+      degradê da página é verde de marca, no hero
+   · "muita poluição visual" MAS TAMBÉM "não gosto de espaço em
+      branco sem nada"  → densidade média: cheio de conteúdo,
+      organizado em grade
+   · "eu quero que site converta, não que fique só bonito"
 
-   Do 9x vêm as proporções, medidas a 1280px na página renderizada:
-   container 1184 + gutters 48, bandas de 80px, título de card 24/1.2,
-   coluna curta 16/600 + 13/1.5, eyebrow mono 12 maiúsculo, cards
-   raio 12 + borda 1px sem sombra pesada. A escala de display é bem
-   maior que a do 9x — é o que dá o impacto pedido.
+   Registro anterior ("memorando executivo": filete, zero sombra,
+   zero raio, bandas enormes) caiu no segundo erro — leu como
+   "espaço em branco sem nada" e "parece blog".
    ============================================================ */
+
 
 /* ---------- display: Archivo ----------
    Revertido do Bodoni Moda por decisão do cliente: a serifa de alto
@@ -84,88 +100,86 @@
 }
 
 :root {
-  /* --- superfícies ---------------------------------------------
-     Medido no go9x: base #FFFDF9 (L*99 — mais branco que o cinza-frio
-     que eu tinha), branco puro para as bandas de conteúdo, e UMA banda
-     escura por página. O calor é imperceptível (b* ~+1,5); tanto o
-     creme #f3f0e8 quanto o cinza-frio #f8f9fb eram exageros meus em
-     direções opostas. */
-  --paper: #fffdf9;
-  --paper-pure: #ffffff;
-  --stone: #f4f2ec;
-  --stone-line: #dbd8c8;
-  --ink-deep: #101418;
-  --ink-raised: #1a1f26;
+  /* ---------- superfícies ----------------------------------------
+     Branco como base (Stripe é branco), e uma superfície levemente
+     esverdeada para alternar seções sem trocar de assunto. O bege
+     ficou: "cara, eu acho ok", então virou a superfície alternada
+     em vez da base. */
+  --paper: #ffffff;
+  --surface: #f6f9f6;
+  --surface-2: #eef4ef;
+  --ink-deep: #08281a;
 
-  /* --- tinta --------------------------------------------------- */
-  --ink: #151a20;
-  --ink-soft: #3f4b5d;
-  --muted: #657081;
-  --faint: #6c7686;
-  --on-dark: #fffdf9;
-  --on-dark-muted: rgba(255, 253, 249, 0.7);
-  --on-dark-line: rgba(255, 253, 249, 0.14);
+  /* ---------- tinta ----------------------------------------------
+     Verde-petróleo escuro no lugar do azul-marinho da Stripe. É o
+     que mantém a identidade sem usar o verde-néon como texto. */
+  --ink: #0d2a1d;
+  --ink-soft: #3f594c;
+  --muted: #5f7568;
+  --on-dark: #f2f7f3;
+  --on-dark-soft: rgba(242, 247, 243, 0.72);
+  --on-dark-faint: rgba(242, 247, 243, 0.56);
+  --on-dark-line: rgba(242, 247, 243, 0.16);
 
-  /* --- linhas -------------------------------------------------- */
-  --line: #e7e4d9;
-  --line-strong: #dbd8c8;
+  /* ---------- linhas ---------------------------------------------- */
+  --line: #e3eae5;
+  --line-strong: #cfdbd3;
 
-  /* --- acento --------------------------------------------------
-     Terracota. Usada como o 9x usa: quase nunca. */
-  --accent: #b8502a;
-  --accent-deep: #98401f;
+  /* ---------- acento ----------------------------------------------
+     Duas versões, por contraste medido:
+       · --accent      → texto e link sobre branco. 5,2:1. AA ok.
+       · --accent-live → verde de marca. Só em fundo escuro e no
+                         degradê do hero, nunca como texto sobre
+                         branco (mede 2,3:1, reprova).  */
+  --accent: #0d7d3c;
+  --accent-hover: #0a6531;
+  --accent-live: #14c114;
+  --accent-wash: #eaf5ee;
 
-  /* --- raio / borda -------------------------------------------- */
-  --radius-sm: 6px;
-  --radius-md: 12px;
+  /* ---------- geometria -------------------------------------------
+     Raio 8px e elevação suave: é o que separa "produto bem feito"
+     de "wireframe". O registro anterior tinha raio 3 e zero sombra
+     e leu como documento — não era o que ele queria. */
+  --radius: 8px;
   --radius-lg: 12px;
-  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(13, 42, 29, 0.06), 0 1px 3px rgba(13, 42, 29, 0.05);
+  --shadow-md: 0 2px 4px rgba(13, 42, 29, 0.05), 0 8px 20px rgba(13, 42, 29, 0.07);
+  --shadow-lg: 0 4px 8px rgba(13, 42, 29, 0.05), 0 18px 44px rgba(13, 42, 29, 0.11);
 
-  /* Sombra de card medida no go9x: presente mas quase invisível. */
-  --shadow-card: 0 8px 24px rgba(21, 26, 32, 0.05);
+  /* ---------- layout ----------------------------------------------- */
+  --container: 1140px;
+  --gutter: clamp(20px, 4vw, 40px);
 
-  /* --- layout -------------------------------------------------- */
-  --container: 1184px;
-  --gutter: clamp(20px, 3.75vw, 48px);
-  --measure: 700px;
+  /* ---------- ritmo vertical ----------------------------------------
+     "Aqui tem espaço gigantesco." Era clamp(92px, 10vw, 168px). */
+  --band: clamp(64px, 6.4vw, 96px);
+  --band-lg: clamp(76px, 7.4vw, 112px);
 
-  /* --- ritmo vertical ------------------------------------------
-     80px, o valor do 9x. Eu tinha inflado para 187px chamando de
-     "premium" — o resultado foi uma página frouxa, não caro. */
-  --band: clamp(56px, 6vw, 80px);
-  --band-lg: clamp(64px, 6.6vw, 88px);
-  --band-xl: clamp(72px, 7.4vw, 100px);
-  --stack: clamp(36px, 3.8vw, 50px);
-
-  /* --- tipografia ----------------------------------------------
-     Escala do 9x: h1 64/64, h2 50/50, ambos com ls -2px; h3 24/28.8
-     ls -0.6px; corpo 16/22.4. Nada infla. */
-  --font-display: Archivo, Inter, -apple-system, Arial, sans-serif;
-  --font-title: Inter, -apple-system, "Segoe UI", Arial, sans-serif;
+  /* ---------- tipografia --------------------------------------------
+     "Muito muito grande, em exagero. Deixar pouquinho mais curto,
+     fonte menor." O h1 era clamp(44px, 5.4vw, 80px). */
+  --font-display: Archivo, Inter, -apple-system, "Segoe UI", Arial, sans-serif;
   --font-body: Inter, -apple-system, "Segoe UI", Arial, sans-serif;
-  --font-label: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
-  --font-mono: "SFMono-Regular", "Cascadia Code", Consolas, monospace;
 
-  --fs-display: clamp(38px, 4.6vw, 64px); /* h1 */
-  --fs-h2: clamp(32px, 3.7vw, 50px);
-  --fs-h3: clamp(20px, 1.8vw, 24px);
-  --fs-statement: clamp(28px, 3.2vw, 42px);
-  --fs-stat: clamp(38px, 4.6vw, 64px);
-  --fs-lead: clamp(16px, 1.3vw, 20px);
+  --fs-display: clamp(35px, 3.9vw, 58px);  /* h1 */
+  --fs-h2: clamp(28px, 2.9vw, 42px);
+  --fs-h3: 19px;                            /* título de caixinha */
+  --fs-number: clamp(46px, 5.2vw, 76px);
+  --fs-lead: clamp(17px, 1.25vw, 19px);
   --fs-body: 16px;
-  --fs-sm: 15px;
-  --fs-xs: 13px;
-  --fs-eyebrow: 12px;
+  --fs-sm: 14.5px;
+  --fs-eyebrow: 13px;
 
-  --lh-display: 1.0;
-  --lh-h3: 1.2;
-  --lh-body: 1.4;
+  --lh-display: 1.06;
+  --lh-body: 1.6;
 
-  --ls-display: -0.031em; /* -2px em 64px */
-  --ls-h3: -0.025em;      /* -0.6px em 24px */
-  --ls-eyebrow: 0.055em;  /* 0.6px em 11px — muito mais fechado que eu usava */
+  --ls-display: -0.028em;
+  --ls-h2: -0.024em;
+  --ls-eyebrow: 0.075em;
 
-  /* --- motion --------------------------------------------------- */
+  /* ---------- motion ------------------------------------------------
+     O movimento voltou: marquee de logos, nome da ferramenta
+     alternando, entrada suave no scroll. Nada que pisque ou pulse. */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur: 0.55s;
+  --dur: 0.6s;
 }

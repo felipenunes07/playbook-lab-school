@@ -1,16 +1,43 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/Button";
-import { ToolMark, TOOLS } from "../ui/ToolMark";
-import { CTA, CONTACT_URL, HERO } from "../../data/site";
+import { TOOLS } from "../ui/tools";
+import { CLIENT_LOGOS, CTA, CONTACT_URL, HERO, PROOF } from "../../data/site";
 
-const ROTATE_MS = 3400;
+const ROTATE_MS = 4200;
 
-const APPLICATIONS = [
-  { area: "Operações", from: "Tarefa manual", to: "Workflow com IA" },
-  { area: "Conhecimento", from: "Documentos dispersos", to: "Contexto consultável" },
-  { area: "Times comerciais", from: "Informação solta", to: "Decisão assistida" },
-] as const;
+function LogoRow({ duplicate = false }: { duplicate?: boolean }) {
+  return (
+    <ul className="marquee-row" aria-hidden={duplicate || undefined}>
+      {CLIENT_LOGOS.map((src) => (
+        <li key={src}>
+          {/* alt vazio: os arquivos de origem não trazem o nome das
+              empresas. A faixa toda é rotulada pelo h2 ao lado.
 
+              `eager`, não `lazy`: a faixa está ACIMA DO FOLD, e lazy
+              em imagem acima do fold é sempre errado — mediu
+              naturalWidth 0 e o marquee colapsou para 0px de altura.
+              A cópia duplicada também carrega eager, senão abre um
+              buraco no meio da rolagem. São ~60 kB no total. */}
+          <img src={src} alt="" loading="eager" decoding="async" />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * "Uma hero curtinha, aí alguns [logos]" — e a fórmula exata que o
+ * Victor descreveu na call: "tem título, subtítulo, botõezinhos,
+ * empresas passando. Legal, bem isso."
+ *
+ * A faixa de logos voltou a rolar. Eu tinha trocado por fileira
+ * estática; ele foi perguntado direto ("gosta assim ou gosta
+ * passando?") e respondeu "acho que passando é mais legal, cara. Aí
+ * deixa mais fininha essa linha". Então: rola, e a faixa é fina.
+ *
+ * O nome da ferramenta contratada alterna entre Claude / ChatGPT /
+ * Gemini. É a única cor viva fora do acento de marca.
+ */
 export function Hero() {
   const [index, setIndex] = useState(0);
   const tool = TOOLS[index];
@@ -25,104 +52,43 @@ export function Hero() {
 
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <div className="hero-shell">
-        <div className="container hero-inner">
-          <div className="hero-atmosphere" aria-hidden="true">
-            <span className="hero-orbit hero-orbit--outer"><i /><i /><i /></span>
-            <span className="hero-orbit hero-orbit--inner"><i /><i /></span>
-          </div>
-          <p className="eyebrow hero-eyebrow">
-            <span className="hero-eyebrow-dot" aria-hidden="true" />
-            {HERO.eyebrow}
-          </p>
+      {/* O único degradê da página, e ele é o verde de marca. "Se não
+          fizer parte da identidade visual ou não agregar, eu também
+          nem quero." */}
+      <div className="hero-wash" aria-hidden="true" />
 
-          <h1 id="hero-title" className="display hero-title">
-            <span className="visually-hidden">{HERO.headlineA11y}</span>
-            <span aria-hidden="true">
-              <span className="hero-line hero-line--tool">
-                {HERO.headlineBefore}{" "}
-                <span
-                  className="tool-chip"
-                  style={{ ["--tool" as string]: tool.colorInk }}
-                >
-                  <ToolMark tool={tool.id} size={30} />
-                  <span key={tool.id}>{tool.label}</span>
-                </span>
-              </span>
-              <span className="hero-line">{HERO.headlineAfter}</span>
-              <span className="hero-line hero-line--payoff">{HERO.headlineRoi}</span>
-            </span>
-          </h1>
+      <div className="container hero-inner">
+        <p className="eyebrow">{HERO.eyebrow}</p>
 
-          <p className="lead hero-sub">{HERO.subheadline}</p>
+        <h1 id="hero-title" className="display hero-title">
+          <span className="visually-hidden">{HERO.headlineA11y}</span>
+          <span aria-hidden="true">
+            {HERO.headlineBefore}{" "}
+            <em className="hero-tool" style={{ ["--tool" as string]: tool.colorInk }}>
+              <span key={tool.id}>{tool.label}</span>
+            </em>{" "}
+            {HERO.headlineAfter}
+            <span className="hero-payoff">{HERO.headlinePayoff}</span>
+          </span>
+        </h1>
 
-          <div className="hero-actions">
-            <Button href={CONTACT_URL} variant="primary">
-              {CTA.primary}
-            </Button>
-            <Button href="#programas" variant="secondary">
-              {CTA.secondary}
-            </Button>
-          </div>
-          <p className="hero-micro">{HERO.microcopy}</p>
+        <p className="lead hero-lead">{HERO.subheadline}</p>
 
-          <div className="hero-tool-rail" aria-label="Ferramentas compatíveis">
-            {TOOLS.map((item, itemIndex) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`hero-tool ${itemIndex === index ? "is-active" : ""}`}
-                onClick={() => setIndex(itemIndex)}
-                aria-pressed={itemIndex === index}
-                style={{ ["--tool" as string]: item.colorInk }}
-              >
-                <ToolMark tool={item.id} size={18} />
-                <span>{item.label}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="hero-dossier" aria-label="Estrutura do programa in-company">
-            <div className="hero-dossier-head">
-              <span>PL / PROGRAMA IN-COMPANY</span>
-              <strong><i aria-hidden="true" /> Mandato de transformação</strong>
-              <span>CONFIDENCIAL / 01</span>
-            </div>
-            <div className="hero-dossier-grid">
-              <article>
-                <span>01 / DIAGNÓSTICO</span>
-                <strong>Onde a IA muda o trabalho</strong>
-                <p>Ferramentas, processos e oportunidades priorizadas.</p>
-              </article>
-              <article>
-                <span>02 / CAPACITAÇÃO</span>
-                <strong>Aprendizado sobre casos reais</strong>
-                <p>Sessões construídas com o contexto da sua equipe.</p>
-              </article>
-              <article>
-                <span>03 / IMPLEMENTAÇÃO</span>
-                <strong>Capacidade em operação</strong>
-                <p>Skills, workflows e agentes que continuam em uso.</p>
-              </article>
-            </div>
-            <div className="hero-dossier-foot" aria-hidden="true">
-              <span>SUA OPERAÇÃO</span><i>→</i><span>CAPACIDADE INSTALADA</span><i>→</i><strong>ROI</strong>
-            </div>
-          </div>
+        <div className="hero-actions">
+          <Button href={CONTACT_URL} variant="primary">{CTA.primary}</Button>
+          <Button href="#programas" variant="secondary">{CTA.secondary}</Button>
         </div>
+        <p className="hero-micro">{HERO.microcopy}</p>
+      </div>
 
-        <div className="container application-strip">
-          <span className="visually-hidden">Exemplos de aplicação: tarefa manual em workflow com IA, documentos dispersos em contexto consultável e informação solta em decisão assistida.</span>
-          <p aria-hidden="true">Exemplos de aplicação</p>
-          <div className="application-live" key={APPLICATIONS[index].area} aria-hidden="true">
-            <span>{APPLICATIONS[index].area}</span>
-            <strong>{APPLICATIONS[index].from}</strong>
-            <i>→</i>
-            <strong>{APPLICATIONS[index].to}</strong>
-          </div>
-          <div className="application-tool" aria-hidden="true" style={{ ["--tool" as string]: tool.colorInk }}>
-            <ToolMark tool={tool.id} size={17} />
-            <span>{tool.label} em contexto</span>
+      <div className="proof">
+        <div className="container proof-inner">
+          <h2 className="proof-label">{PROOF.label}</h2>
+          <div className="marquee" aria-label="Empresas atendidas pela Playbook Lab">
+            <div className="marquee-track">
+              <LogoRow />
+              <LogoRow duplicate />
+            </div>
           </div>
         </div>
       </div>

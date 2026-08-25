@@ -1,27 +1,29 @@
+import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
 import { CTA, CONTACT_URL, FINAL_CTA } from "../../data/site";
 
-/** Two buttons and a line of microcopy. No form, no countdown — this is an
- *  enterprise sale and the ask is a conversation. */
+/**
+ * Fecho em banda escura — o único bloco escuro da página, e o lugar
+ * onde o verde de marca finalmente aparece em cheio.
+ */
 export function FinalCTA() {
   return (
-    <section className="band band--lg final-cta" aria-labelledby="cta-title">
-      <div className="container">
-        <div className="section-head section-head--center">
-          <h2 id="cta-title" className="h2">
-            {FINAL_CTA.headline}
+    <section className="final band band--lg band--dark" aria-labelledby="final-title">
+      <div className="container final-inner">
+        <Reveal className="final-copy">
+          <p className="eyebrow">{FINAL_CTA.eyebrow}</p>
+          <h2 id="final-title" className="h2 final-statement">
+            {FINAL_CTA.statement.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
           </h2>
-          <p className="lead">{FINAL_CTA.lead}</p>
-        </div>
-        <div className="final-cta-actions">
-          <Button href={CONTACT_URL} variant="primary">
-            {CTA.primary}
-          </Button>
-          <Button href="#programas" variant="secondary">
-            {CTA.secondary}
-          </Button>
-        </div>
-        <p className="final-cta-micro">{FINAL_CTA.microcopy}</p>
+          <p className="lead">{FINAL_CTA.body}</p>
+        </Reveal>
+
+        <Reveal className="final-action" order={1}>
+          <Button href={CONTACT_URL} variant="primary">{CTA.primary}</Button>
+          <span className="final-micro">{FINAL_CTA.microcopy}</span>
+        </Reveal>
       </div>
     </section>
   );
