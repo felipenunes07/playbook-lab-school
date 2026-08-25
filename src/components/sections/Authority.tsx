@@ -1,4 +1,5 @@
 import { Reveal } from "../ui/Reveal";
+import { CountUp } from "../ui/CountUp";
 import { AUTHORITY } from "../../data/site";
 
 /**
@@ -14,14 +15,18 @@ import { AUTHORITY } from "../../data/site";
  *
  * Os três números da empresa moram aqui, juntos. Espalhados por duas
  * seções eles se diluíam; numa fileira só, eles somam.
+ *
+ * Contam até o valor final quando a fileira entra na tela. Ver
+ * CountUp: o valor real é o estado inicial, e a contagem só é armada
+ * se o observer for confiável — a versão antiga travava em "0+".
  */
 export function Authority() {
   return (
     <section className="authority band band--lg" id="autoridade" aria-labelledby="authority-title">
       <div className="authority-wash" aria-hidden="true" />
 
-      <div className="container authority-inner">
-        <Reveal className="authority-head">
+      <div className="authority-inner">
+        <Reveal className="container authority-head">
           <p className="eyebrow">{AUTHORITY.eyebrow}</p>
           <h2 id="authority-title" className="h2 authority-title">
             {AUTHORITY.headline[0]}{" "}
@@ -30,16 +35,21 @@ export function Authority() {
           <p className="lead">{AUTHORITY.lead}</p>
         </Reveal>
 
-        <Reveal as="dl" className="stat-row" order={1}>
-          {AUTHORITY.stats.map((stat) => (
-            <div key={stat.value}>
-              <dt>{stat.value}</dt>
-              <dd>{stat.label}</dd>
-            </div>
-          ))}
+        {/* Fora do container: na Stripe os filetes da régua de números
+            correm de borda a borda da tela, não param na coluna de
+            conteúdo. É metade do que faz aquela seção parecer limpa. */}
+        <Reveal className="stat-band" order={1}>
+          <dl className="container stat-row">
+            {AUTHORITY.stats.map((stat) => (
+              <div key={stat.value}>
+                <dt><CountUp value={stat.value} /></dt>
+                <dd>{stat.label}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
 
-        <div className="authority-story">
+        <div className="container authority-story">
           <Reveal as="figure" className="authority-figure">
             <img
               src={AUTHORITY.image.src}

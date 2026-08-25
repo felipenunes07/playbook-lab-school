@@ -1,5 +1,6 @@
 import { Reveal } from "../ui/Reveal";
 import { Arrow } from "../ui/Button";
+import { Check } from "../ui/Check";
 import { CONTACT_URL, PROGRAMS, PROGRAMS_HEAD } from "../../data/site";
 
 /**
@@ -52,7 +53,10 @@ export function Programs() {
                 <p className="spec-label">No programa</p>
                 <ul aria-label={`O que entra em ${program.name}`}>
                   {program.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
+                    <li key={tag}>
+                      <Check />
+                      <span><strong>{tag}</strong></span>
+                    </li>
                   ))}
                 </ul>
               </div>

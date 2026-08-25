@@ -1,18 +1,23 @@
 import { Reveal } from "../ui/Reveal";
-import { TOOLS } from "../ui/tools";
+import { Check } from "../ui/Check";
 import { TAILORED } from "../../data/site";
 
 /**
- * A fórmula da Stripe que o Victor apontou na tela, literal:
- * "poderia ter título, subtítulo, daí uma frase de duas, três linhas,
- * menor. E daí algumas caixinhas falando de coisas — item 1, item 2,
- * item 3, item 4. Bem bonito."
+ * A fórmula da Stripe que o Victor apontou na tela: "título,
+ * subtítulo, daí uma frase de duas, três linhas, menor. E daí algumas
+ * caixinhas falando de coisas — item 1, item 2, item 3. Bem bonito."
  *
- * Sem ícone e sem pílula tingida: "essas caixinhas com esses ícones é
- * coisa [de IA]... a mesma estrutura, só que não parece web codado."
- * As ferramentas viraram uma linha de texto com meio-ponto — pílula de
- * fundo tingido em fila é a assinatura mais reconhecível de página
- * gerada por IA, e seis delas numa caixinha era o pior caso da página.
+ * Duas correções depois de olhar a seção renderizada:
+ *
+ * 1. Os cards 2 e 3 tinham título + três linhas e um buraco embaixo,
+ *    enquanto o card 1 tinha uma lista. Cabeça desequilibrada e
+ *    "espaço em branco sem nada". Agora os três carregam lista
+ *    concreta — e ela responde a pergunta que o card levanta.
+ * 2. A cabeça da seção ocupava metade da largura com a outra metade
+ *    vazia. Virou duas colunas: título à esquerda, frase à direita.
+ *
+ * Sem ícone decorativo e sem pílula tingida. A marca de check é
+ * informação — diz "isto entra".
  */
 export function Tailored() {
   return (
@@ -22,7 +27,7 @@ export function Tailored() {
       aria-labelledby="tailored-title"
     >
       <div className="container">
-        <Reveal className="section-head">
+        <Reveal className="section-head section-head--split">
           <p className="eyebrow">{TAILORED.eyebrow}</p>
           <h2 id="tailored-title" className="h2">
             {TAILORED.headline[0]}{" "}
@@ -37,13 +42,20 @@ export function Tailored() {
               <h3 className="h3">{column.title}</h3>
               <p>{column.body}</p>
 
-              {column.key === "tools" ? (
-                <p className="card-tools">
-                  <span className="spec-label">Cobrimos</span>
-                  {[...TOOLS.map((t) => t.label), "Copilot", "Workspace", "Microsoft 365"]
-                    .join(" · ")}
-                </p>
-              ) : null}
+              <div className="spec">
+                <p className="spec-label">{column.listLabel}</p>
+                <ul aria-label={`${column.listLabel} — ${column.title}`}>
+                  {column.items.map((item) => (
+                    <li key={item.label}>
+                      <Check />
+                      <span>
+                        <strong>{item.label}</strong>
+                        {"note" in item && item.note ? <em>{item.note}</em> : null}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
           ))}
         </div>

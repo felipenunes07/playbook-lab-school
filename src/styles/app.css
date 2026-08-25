@@ -582,16 +582,43 @@ a:hover > .btn-arrow {
 }
 
 .spec ul {
-  margin-top: 10px;
-  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 14px;
 }
 
+/* Check + texto, sem filete. A versão só com filete ficou parecendo
+   tabela nua — informativa mas pobre, que é o outro erro. O check diz
+   "isto entra", e é o que a Stripe usa em lista de item incluído. */
 .spec li {
-  padding-block: 9px;
-  border-bottom: 1px solid var(--line);
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--ink-soft);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+.spec .check {
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.spec li strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* A nota entra na linha de baixo, em tinta fraca: é o que dá densidade
+   sem virar parágrafo. */
+.spec li em {
+  display: block;
+  margin-top: 1px;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.45;
+  color: var(--muted);
 }
 
 .program-for {
@@ -650,6 +677,10 @@ a:hover > .btn-arrow {
   z-index: 1;
 }
 
+.authority-story {
+  margin-top: clamp(44px, 5vw, 72px);
+}
+
 .authority-head {
   display: flex;
   flex-direction: column;
@@ -666,44 +697,68 @@ a:hover > .btn-arrow {
   max-width: 56ch;
 }
 
-/* A fileira de números. Divisórias de filete entre as células, igual
-   à referência — e o filete de topo que fecha a régua. */
+/* ---------- a régua de números ----------
+   Comparada lado a lado com a referência, três coisas faziam a nossa
+   parecer mais pesada:
+
+   1. Filete VERTICAL entre as células. A referência não tem nenhum —
+      era exatamente a "margem feia". Saiu.
+   2. Os filetes horizontais paravam na largura do container e eram
+      `--line-strong`. Agora correm de borda a borda da tela e usam o
+      filete mais leve.
+   3. Peso 600 no número. A referência usa peso leve; 500 já tira a
+      sensação de bloco.
+
+   E ganhou o hover suave que a referência tem. */
+
+.stat-band {
+  margin-top: clamp(38px, 4.2vw, 56px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
 .stat-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: clamp(38px, 4.2vw, 56px);
-  border-top: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line-strong);
 }
 
 .stat-row > div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: clamp(28px, 3vw, 40px) 22px;
+  gap: 12px;
+  padding: clamp(30px, 3.2vw, 44px) 22px;
   text-align: center;
+  transition:
+    background 0.3s var(--ease),
+    transform 0.3s var(--ease);
 }
 
-.stat-row > div + div {
-  border-left: 1px solid var(--line-strong);
+/* O hover leve da referência: a célula clareia e o número sobe 2px. */
+.stat-row > div:hover {
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.stat-row > div:hover dt {
+  transform: translateY(-2px);
 }
 
 .stat-row dt {
   font-family: var(--font-display);
   font-size: var(--fs-number);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.038em;
   color: var(--accent);
   font-variant-numeric: lining-nums tabular-nums;
+  transition: transform 0.3s var(--ease);
 }
 
 .stat-row dd {
-  max-width: 26ch;
+  max-width: 24ch;
   font-size: var(--fs-sm);
   line-height: 1.5;
-  color: var(--ink-soft);
+  color: var(--muted);
   text-wrap: pretty;
 }
 
@@ -713,7 +768,6 @@ a:hover > .btn-arrow {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(32px, 4.4vw, 64px);
   align-items: center;
-  margin-top: clamp(44px, 5vw, 72px);
 }
 
 .authority-figure {
@@ -770,21 +824,11 @@ a:hover > .btn-arrow {
    04 / 06 · CAIXINHAS ESPECÍFICAS
    ============================================================ */
 
-/* Seis pílulas com borda viraram uma linha de texto separada por
-   meio-ponto. Era o pior caso da página: seis chips numa caixinha. */
-.card p.card-tools,
-.card-tools {
-  margin-top: 18px;
-  padding-top: 16px;
+/* A `.spec` dentro de um card ganha filete de separação do texto. */
+.card .spec {
+  margin-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid var(--line);
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: var(--ink-soft);
-}
-
-.card-tools .spec-label {
-  display: block;
-  margin-bottom: 6px;
 }
 
 .teaching-card {
@@ -1088,8 +1132,16 @@ a:hover > .btn-arrow {
 
   .problem-inner,
   .authority-story,
-  .final-inner {
+  .final-inner,
+  /* Medido a 375px: sem isto a cabeça dividida ficava com 147px por
+     coluna. */
+  .section-head--split {
     grid-template-columns: 1fr;
+  }
+
+  .section-head--split .h2,
+  .section-head--split .lead {
+    max-width: 100%;
   }
 
   .authority-figure img {
@@ -1132,15 +1184,12 @@ a:hover > .btn-arrow {
     padding: 20px;
   }
 
-  /* A fileira de números vira coluna, com o filete virando divisória
-     horizontal. */
   .stat-row {
     grid-template-columns: 1fr;
   }
 
   .stat-row > div + div {
-    border-top: 1px solid var(--line-strong);
-    border-left: 0;
+    border-top: 1px solid var(--line);
   }
 
   .programs-grid,

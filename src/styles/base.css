@@ -198,6 +198,30 @@ svg {
   max-width: 20ch;
 }
 
+/* Cabeça em duas colunas: título à esquerda, frase à direita. Sem
+   isto, o título ocupava metade da largura e a outra metade ficava
+   vazia — "espaço em branco sem nada". */
+.section-head--split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px clamp(40px, 6vw, 88px);
+  align-items: end;
+  max-width: 100%;
+}
+
+.section-head--split .eyebrow {
+  grid-column: 1 / -1;
+}
+
+.section-head--split .h2 {
+  max-width: 15ch;
+}
+
+.section-head--split .lead {
+  max-width: 46ch;
+  padding-bottom: 4px;
+}
+
 /* ---------- as caixinhas ----------
    Texto, nunca ícone: "essas caixinhas com esses ícones é coisa
    [de IA]... a mesma estrutura só que não parece web codado."
