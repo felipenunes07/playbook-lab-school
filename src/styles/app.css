@@ -866,6 +866,85 @@ a:hover > .btn-arrow {
   border-top: 1px solid var(--line);
 }
 
+/* ============================================================
+   04 · PERSONALIZAÇÃO — faixas numeradas
+
+   Ritmo diferente de Programas de propósito: lá são três cards
+   atravessando a tela, aqui são três faixas descendo. Sem card,
+   sem sombra, sem raio. Duas seções adjacentes com o mesmo
+   componente liam como a mesma seção duas vezes.
+   ============================================================ */
+
+.lanes {
+  margin-top: clamp(40px, 4.4vw, 58px);
+  border-top: 1px solid var(--line);
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 0.36fr) minmax(0, 0.64fr);
+  gap: 24px clamp(28px, 4vw, 60px);
+  padding-block: clamp(30px, 3.4vw, 46px);
+  border-bottom: 1px solid var(--line);
+}
+
+.lane-num {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.lane-title {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.024em;
+}
+
+.lane-copy p {
+  max-width: 38ch;
+  margin-top: 12px;
+  font-size: var(--fs-sm);
+  line-height: 1.62;
+  color: var(--muted);
+}
+
+/* A régua horizontal de itens. Em largura cheia ela cabe numa linha,
+   e no caso dos níveis isso transforma a lista numa progressão
+   legível — informação, não diagrama decorativo. */
+.lane-scale ul {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: 20px 22px;
+  margin-top: 14px;
+}
+
+.lane-scale li {
+  padding-top: 12px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.lane-scale strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.lane-scale em {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
 .teaching-card {
   display: flex;
   flex-direction: column;
@@ -1192,6 +1271,16 @@ a:hover > .btn-arrow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  /* A faixa perde a coluna do número: ele sobe para cima do título. */
+  .lane {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 18px clamp(20px, 3vw, 32px);
+  }
+
+  .lane-scale {
+    grid-column: 2;
+  }
+
   .footer-inner {
     grid-template-columns: 1fr;
   }
@@ -1230,6 +1319,20 @@ a:hover > .btn-arrow {
   .programs-grid,
   .cards {
     grid-template-columns: 1fr;
+  }
+
+  .lane {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .lane-scale {
+    grid-column: 1;
+  }
+
+  /* Quatro níveis lado a lado não caberiam a 375px. */
+  .lane-scale ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   .footer-columns {
