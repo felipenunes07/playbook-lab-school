@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/Button";
 import { TOOLS } from "../ui/tools";
+import { Aurora } from "../art/Aurora";
 import { CLIENT_LOGOS, CTA, CONTACT_URL, HERO, PROOF } from "../../data/site";
 
 const ROTATE_MS = 4200;
@@ -52,10 +53,9 @@ export function Hero() {
 
   return (
     <section className="hero" aria-labelledby="hero-title">
-      {/* O único degradê da página, e ele é o verde de marca. "Se não
-          fizer parte da identidade visual ou não agregar, eu também
-          nem quero." */}
-      <div className="hero-wash" aria-hidden="true" />
+      <div className="hero-wash" aria-hidden="true">
+        <Aurora />
+      </div>
 
       <div className="container hero-inner">
         <p className="eyebrow">{HERO.eyebrow}</p>
@@ -75,7 +75,7 @@ export function Hero() {
         <p className="lead hero-lead">{HERO.subheadline}</p>
 
         <div className="hero-actions">
-          <Button href={CONTACT_URL} variant="primary">{CTA.primary}</Button>
+          <Button href={CONTACT_URL} variant="primary" arrow>{CTA.primary}</Button>
           <Button href="#programas" variant="secondary">{CTA.secondary}</Button>
         </div>
         <p className="hero-micro">{HERO.microcopy}</p>

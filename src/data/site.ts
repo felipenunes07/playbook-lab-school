@@ -170,6 +170,46 @@ export const PROGRAMS_HEAD = {
 } as const;
 
 /* ============================================================
+   04 · COMO RODA — a mecânica de um programa in-company
+
+   A página nunca explicava COMO um programa acontece, que é a
+   pergunta central de quem compra treinamento in-company. E é
+   também onde o caráter de IA aparece de verdade: não em ícone de
+   robô nem em grade de fundo, mas nos artefatos que o programa
+   produz — Skills, workflows, automações, agentes.
+
+   Estes quatro passos e os ativos já estavam escritos no projeto
+   (o METHOD e a coluna "Sistemas" dos entregáveis) e tinham sido
+   descartados numa versão anterior.
+   ============================================================ */
+export const METHOD = {
+  eyebrow: "Como roda",
+  headline: "Quatro semanas dentro da sua operação.",
+  lead: "Um programa in-company não é uma aula com data. É uma sequência que entra no trabalho que já existe e sai deixando coisa construída.",
+  steps: [
+    {
+      label: "Diagnóstico",
+      body: "Entendemos ferramentas, maturidade e onde o trabalho realmente trava.",
+    },
+    {
+      label: "Capacitação",
+      body: "A equipe aprende usando processos, documentos e casos reais da empresa.",
+    },
+    {
+      label: "Construção",
+      body: "O conhecimento vira Skills, workflows e automações — novos padrões de trabalho.",
+    },
+    {
+      label: "Adoção",
+      body: "Acompanhamos a aplicação, removemos bloqueios e medimos sinais de mudança.",
+    },
+  ],
+  /** O que fica instalado. É aqui que a página fala IA em concreto. */
+  assetsLabel: "O que fica instalado",
+  assets: ["Skills", "Workflows", "Playbooks", "Automações", "Agentes", "Roadmap de evolução"],
+} as const;
+
+/* ============================================================
    04 · PERSONALIZAÇÃO
    As três colunas que o Victor escreveu em inglês, em PT-BR.
    ============================================================ */

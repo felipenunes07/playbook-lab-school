@@ -3,6 +3,7 @@ import { Footer } from "./components/layout/Footer";
 import { Hero } from "./components/sections/Hero";
 import { Problem } from "./components/sections/Problem";
 import { Programs } from "./components/sections/Programs";
+import { Method } from "./components/sections/Method";
 import { Tailored } from "./components/sections/Tailored";
 import { Authority } from "./components/sections/Authority";
 import { Cases } from "./components/sections/Cases";
@@ -18,7 +19,9 @@ import { FinalCTA } from "./components/sections/FinalCTA";
  *  02  Problema    "Assinar foi fácil" + 3 sintomas na vertical.
  *  03  Programas   "Ferramenta sozinha não gera ROI" É o título desta
  *                  seção — a tese e os três programas são uma coisa só.
- *  04  Personaliz. Fórmula Stripe: título, subtítulo, frase, caixinhas.
+ *  04  Como roda   A sequência de um programa in-company + os ativos
+ *                  que ficam. É onde a página fala IA em concreto.
+ *  05  Personaliz. Uma banda, três colunas.
  *  05  Autoridade  Sobre nós, com a foto + fileira 50+ / 2k+ / 60+.
  *  --  Cases       Pedidos na call. RENDERIZA NULL até ter dado real.
  *  --  Depoimentos Pedidos na call. RENDERIZA NULL até ter dado real.
@@ -47,6 +50,7 @@ export default function App() {
         <Hero />
         <Problem />
         <Programs />
+        <Method />
         <Tailored />
         <Authority />
         <Cases />

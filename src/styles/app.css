@@ -212,66 +212,28 @@ a:hover > .btn-arrow {
 /* O único degradê da página, e ele É a identidade: verde Playbook.
    "Se não fizer parte da identidade visual ou não agregar, eu também
    nem quero." */
-/* ---------- a aurora angulada do hero ----------
-   O elemento mais reconhecível da Stripe: um bloco de degradê
-   inclinado, cortado na diagonal, ocupando o topo. Feito com um
-   pseudo-elemento rotacionado e `clip-path`, não com imagem. */
+/* ---------- a aurora em fitas ----------
+   Trocou o degradê cônico desfocado por fitas nítidas em SVG (ver
+   src/components/art/Aurora.tsx). O borrão lia como fundo genérico de
+   template; a fita tem borda definida e lê como ilustração. */
 .hero-wash {
   position: absolute;
   z-index: 0;
   top: 0;
   right: 0;
+  bottom: 0;
   left: 0;
-  height: 100%;
   overflow: hidden;
-  background: linear-gradient(180deg, var(--surface) 0%, var(--paper) 62%);
+  background: linear-gradient(178deg, var(--surface) 0%, var(--paper) 58%);
 }
 
-.hero-wash::before {
-  content: "";
+.aurora {
   position: absolute;
-  top: -58%;
-  right: -32%;
-  width: 92%;
-  height: 176%;
-  background: conic-gradient(
-    from 190deg at 50% 50%,
-    var(--aurora-cyan) 0deg,
-    var(--aurora-violet) 78deg,
-    var(--aurora-pink) 152deg,
-    var(--aurora-amber) 224deg,
-    var(--aurora-cyan) 360deg
-  );
-  opacity: 0.5;
-  filter: blur(52px);
-  transform: rotate(-14deg);
-  /* O corte diagonal que faz a faixa terminar em bisel. */
-  clip-path: polygon(26% 0, 100% 0, 100% 100%, 0 100%);
-  animation: aurora-drift 24s ease-in-out infinite alternate;
-}
-
-/* Um segundo foco, mais frio, do lado oposto — é o que evita a faixa
-   ler como um único borrão. */
-.hero-wash::after {
-  content: "";
-  position: absolute;
-  top: -24%;
-  left: -18%;
-  width: 54%;
-  height: 108%;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(99, 91, 255, 0.34),
-    transparent 68%
-  );
-  filter: blur(38px);
-  animation: aurora-drift 30s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes aurora-drift {
-  to {
-    transform: rotate(-9deg) translate3d(-3%, 2%, 0) scale(1.08);
-  }
+  top: 0;
+  right: 0;
+  /* Sangra para fora em cima e embaixo, como na referência. */
+  width: min(76%, 1080px);
+  height: 132%;
 }
 
 .hero-inner {
@@ -282,7 +244,27 @@ a:hover > .btn-arrow {
   padding-block: clamp(44px, 4.4vw, 64px) clamp(36px, 4vw, 54px);
 }
 
+/* ---------- headline em degradê ----------
+   O gesto da referência: a manchete começa em navy e vai ganhando cor
+   para a direita, onde a linha cruza a aurora.
+
+   `color` vem primeiro como piso: onde `background-clip: text` não
+   houver suporte, o texto fica navy cheio em vez de invisível.
+
+   A parada mais clara é #7a73ff, que mede 3,67:1 sobre branco. O
+   violeta #9089fc da aurora mede 2,93 e reprova ATÉ em texto grande —
+   por isso o degradê para antes dele. */
 .hero-title {
+  color: var(--ink);
+  background: linear-gradient(
+    104deg,
+    #0a2540 16%,
+    #4b45c9 58%,
+    #7a73ff 88%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-top: 20px;
   /* 16em, não 19ch. Medido a 1440/56px: a frase pede ~1003px e o
      payoff ~766px, então qualquer largura entre os dois dá 3 linhas.
@@ -318,7 +300,6 @@ a:hover > .btn-arrow {
 .hero-payoff {
   display: block;
   margin-top: 0.12em;
-  color: var(--ink-soft);
 }
 
 .hero-lead {
@@ -343,14 +324,20 @@ a:hover > .btn-arrow {
    "Acho que passando é mais legal, cara. Aí deixa mais fininha essa
    linha." Rola, e a faixa é fina. */
 
+/* ---------- a faixa de logos, em navy ----------
+   "Mais cor nos logos das empresas." Os arquivos de origem são
+   SILHUETAS BRANCAS com transparência — não existe informação de cor
+   neles para recuperar, então não há como reproduzir o logo-wall
+   colorido da referência sem os assets originais de cada cliente.
+
+   O que dá, e fica melhor que cinza-sobre-branco: usar as silhuetas
+   como foram feitas, em branco cheio sobre navy. Vira uma banda de
+   cor na página e os dez logos ficam nítidos em vez de lavados. */
 .proof {
   position: relative;
   z-index: 1;
-  padding-block: 20px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(8px);
+  padding-block: 24px;
+  background: var(--ink-deep);
 }
 
 .proof-inner {
@@ -364,7 +351,7 @@ a:hover > .btn-arrow {
   font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--muted);
+  color: var(--on-dark-soft);
   /* NBSP no dado impede "IA" de cair sozinho, mas o nowrap garante
      que o rótulo inteiro fique numa linha ao lado do marquee. */
   white-space: nowrap;
@@ -420,10 +407,9 @@ a:hover > .btn-arrow {
   width: 128px;
   height: 30px;
   object-fit: contain;
-  /* Os arquivos são brancos com transparência (feitos para fundo
-     escuro); brightness(0) os traz para tinta sobre branco. */
-  filter: brightness(0);
-  opacity: 0.7;
+  /* Sem `brightness(0)`: sobre navy as silhuetas brancas aparecem como
+     foram desenhadas. É para isto que os arquivos foram feitos. */
+  opacity: 0.82;
   transition: opacity 0.2s ease;
 }
 
@@ -748,6 +734,106 @@ a:hover > .btn-arrow {
   color: var(--indigo-hover);
 }
 
+
+/* ============================================================
+   04 · COMO RODA — a sequência in-company
+
+   Mesma família das outras bandas, mas com DIREÇÃO: os quatro
+   passos ficam pendurados numa régua contínua em degradê de
+   aurora. As outras bandas são colunas paralelas; sequência lê
+   diferente de comparação, e é isso que evita o eco.
+   ============================================================ */
+
+.track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 44px);
+  margin-top: clamp(46px, 5vw, 68px);
+  padding-top: 34px;
+}
+
+/* A régua contínua sobre a qual os passos se penduram. É o único
+   lugar da página onde a aurora aparece como linha cheia — o resto
+   dela só acende no hover. */
+.track::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--aurora-cyan) 0%,
+    var(--aurora-violet) 34%,
+    var(--aurora-pink) 68%,
+    var(--aurora-amber) 100%
+  );
+}
+
+.track-step {
+  position: relative;
+}
+
+/* O marcador de cada passo, sentado na régua. */
+.track-dot {
+  position: absolute;
+  top: -34px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  background: var(--ink-deep);
+}
+
+.track-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--indigo-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.track-label {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.7vw, 23px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+}
+
+.track-step p {
+  margin-top: 10px;
+  font-size: var(--fs-sm);
+  line-height: 1.62;
+  color: var(--muted);
+}
+
+/* Os ativos que ficam. Uma linha, em navy, porque é a resposta a
+   "o que eu levo pra casa" — e é onde a página fala IA em concreto. */
+.assets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 20px;
+  margin-top: clamp(38px, 4vw, 56px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.assets-list {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
 
 /* ============================================================
    04 · PERSONALIZAÇÃO — uma banda, três colunas
@@ -1422,6 +1508,12 @@ a:hover > .btn-arrow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  /* A sequência vira 2x2; a régua continua correndo por cima. */
+  .track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 34px;
+  }
+
   /* A banda vira uma coluna, e cada aspecto ganha filete próprio. */
   .aspect-row {
     grid-template-columns: 1fr;
@@ -1475,6 +1567,25 @@ a:hover > .btn-arrow {
   .aspect-body,
   .aspect-detail {
     max-width: 100%;
+  }
+
+  /* A 375px a régua horizontal não faz sentido: vira lista. */
+  .track {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+  }
+
+  .track::before {
+    display: none;
+  }
+
+  .track-dot {
+    display: none;
+  }
+
+  .track-step {
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
   }
 
   .footer-columns {
