@@ -42,7 +42,7 @@ export function Navbar() {
       <div className="container header-inner">
         <a href={LINKS.site} className="brand" aria-label="Playbook Lab — página inicial">
           <img
-            src="/brand/playbooklab-logo-light.svg"
+            src="/brand/playbooklab-logo-experimento.svg"
             alt="Playbook Lab"
             width={40}
             height={34}

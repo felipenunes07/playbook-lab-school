@@ -74,12 +74,12 @@ svg {
 }
 
 ::selection {
-  background: var(--accent-wash);
+  background: var(--indigo-wash);
   color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--indigo-text);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -136,11 +136,13 @@ svg {
   line-height: 1;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--indigo-text);
 }
 
+/* Sobre o navy o indigo mede 3,31:1 e reprova. O ciano da Stripe mede
+   8,78:1 — e é exatamente o que ela usa em label sobre fundo escuro. */
 .band--dark .eyebrow {
-  color: var(--accent-live);
+  color: var(--cyan);
 }
 
 .display {
@@ -260,7 +262,7 @@ svg {
    interação — interação é informação, não enfeite. */
 .card:hover {
   transform: translateY(-3px);
-  border-color: var(--accent);
+  border-color: var(--indigo-text);
   box-shadow: var(--shadow-md);
 }
 

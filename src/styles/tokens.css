@@ -1,36 +1,19 @@
 /* ============================================================
-   PLAYBOOK LAB · TREINAMENTO CORPORATIVO DE IA
-   Sistema visual: registro Stripe, cor de marca Playbook.
+   EXPERIMENTO · PALETA E UI DA STRIPE
+   Branch experimento/stripe-cores — não mergeado.
 
-   Definido na call de 24/08 com o Victor. As regras vieram
-   literalmente do que ele apontou na tela:
+   Substitui o branco-e-verde por navy + indigo, que é a paleta
+   real do design system da Stripe. Cada cor teve o contraste
+   medido antes de entrar (os valores estão anotados em cada uma).
 
-   · "tem título, subtítulo, botõezinhos, empresas passando.
-      Legal, bem isso"  → fórmula do hero
-   · "poderia ter título, subtítulo, daí uma frase de duas, três
-      linhas, MENOR. E daí algumas caixinhas falando de coisas,
-      item 1, 2, 3, 4. Bem bonito"  → fórmula de toda seção
-   · "muito muito grande, em exagero. Deixar pouquinho mais
-      curto, fonte menor"  → h1 a 60px, não 90px
-   · "aqui tem espaço gigantesco. Aproveitar melhor o
-      espaçamento"  → bandas de 96px, não 168px
-   · "acho que passando é mais legal, deixa mais fininha essa
-      linha"  → marquee de logos volta, faixa fina
-   · "essas caixinhas com ícones é coisa de IA... não parece web
-      codado"  → caixinha é texto, nunca ícone
-   · "se [o efeito de fundo] não fizer parte da identidade
-      visual ou não agregar, eu também nem quero"  → o único
-      degradê da página é verde de marca, no hero
-   · "muita poluição visual" MAS TAMBÉM "não gosto de espaço em
-      branco sem nada"  → densidade média: cheio de conteúdo,
-      organizado em grade
-   · "eu quero que site converta, não que fique só bonito"
+   ⚠️ ISTO ABANDONA O VERDE #14C114 DA PLAYBOOK LAB. É o ponto do
+   teste — avaliar a paleta sem o verde competindo. O logo tem uma
+   variante só para este experimento em
+   /brand/playbooklab-logo-experimento.svg; os arquivos de marca
+   originais não foram tocados.
 
-   Registro anterior ("memorando executivo": filete, zero sombra,
-   zero raio, bandas enormes) caiu no segundo erro — leu como
-   "espaço em branco sem nada" e "parece blog".
+   Para voltar:  git checkout redesign/stripe-register
    ============================================================ */
-
 
 /* ---------- display: Archivo ----------
    Revertido do Bodoni Moda por decisão do cliente: a serifa de alto
@@ -99,71 +82,78 @@
   font-display: swap;
 }
 
+
 :root {
-  /* ---------- superfícies ----------------------------------------
-     Branco como base (Stripe é branco), e uma superfície levemente
-     esverdeada para alternar seções sem trocar de assunto. O bege
-     ficou: "cara, eu acho ok", então virou a superfície alternada
-     em vez da base. */
+  /* ---------- superfícies (Stripe) ----------------------------- */
   --paper: #ffffff;
-  --surface: #f6f9f6;
-  --surface-2: #eef4ef;
-  --ink-deep: #08281a;
+  --surface: #f6f9fc;
+  --surface-2: #eff4f9;
+  --ink-deep: #0a2540;   /* o navy das bandas escuras */
 
-  /* ---------- tinta ----------------------------------------------
-     Verde-petróleo escuro no lugar do azul-marinho da Stripe. É o
-     que mantém a identidade sem usar o verde-néon como texto. */
-  --ink: #0d2a1d;
-  --ink-soft: #3f594c;
-  --muted: #5f7568;
-  --on-dark: #f2f7f3;
-  --on-dark-soft: rgba(242, 247, 243, 0.72);
-  --on-dark-faint: rgba(242, 247, 243, 0.56);
-  --on-dark-line: rgba(242, 247, 243, 0.16);
+  /* ---------- tinta -------------------------------------------
+     Medidos sobre branco / sobre #f6f9fc:
+       navy   15,54 / 14,70
+       slate   7,80 /  7,38
+       muted   4,78 /  4,52   (o limite; nada mais claro que isto) */
+  --ink: #0a2540;
+  --ink-soft: #425466;
+  --muted: #697386;
 
-  /* ---------- linhas ---------------------------------------------- */
-  --line: #e3eae5;
-  --line-strong: #cfdbd3;
+  --on-dark: #ffffff;
+  --on-dark-soft: #adbdcc;      /* 8,09 sobre navy */
+  --on-dark-faint: #8792a2;     /* 4,93 sobre navy */
+  --on-dark-line: rgba(255, 255, 255, 0.14);
 
-  /* ---------- acento ----------------------------------------------
-     Duas versões, por contraste medido:
-       · --accent      → texto e link sobre branco. 5,2:1. AA ok.
-       · --accent-live → verde de marca. Só em fundo escuro e no
-                         degradê do hero, nunca como texto sobre
-                         branco (mede 2,3:1, reprova).  */
-  --accent: #0d7d3c;
-  --accent-hover: #0a6531;
-  --accent-live: #14c114;
-  --accent-wash: #eaf5ee;
+  /* ---------- linhas ------------------------------------------- */
+  --line: #e6ebf1;
+  --line-strong: #d5dee7;
 
-  /* ---------- geometria -------------------------------------------
-     Raio 8px e elevação suave: é o que separa "produto bem feito"
-     de "wireframe". O registro anterior tinha raio 3 e zero sombra
-     e leu como documento — não era o que ele queria. */
+  /* ---------- indigo, a cor de ação da Stripe -------------------
+     Duas versões porque a de marca não passa nas duas superfícies:
+       --indigo       #635bff  4,70 sobre branco · 4,45 sobre claro
+                      (reprova no claro; usar em PREENCHIMENTO, com
+                      branco em cima, que mede 4,70)
+       --indigo-text  #5d54fb  5,09 / 4,82 — passa nas duas. É esta
+                      que vai em texto, eyebrow e link. */
+  --indigo: #635bff;
+  --indigo-text: #5d54fb;
+  --indigo-hover: #4d45e0;
+  --indigo-wash: #f0efff;
+
+  /* Só sobre navy: 8,78. Reprova em qualquer fundo claro (1,77). */
+  --cyan: #00d4ff;
+
+  /* ---------- a aurora -----------------------------------------
+     As paradas de degradê da Stripe. Só em decoração: nenhuma
+     delas passa contraste como texto. */
+  --aurora-pink: #ff80b5;
+  --aurora-violet: #9089fc;
+  --aurora-amber: #ffb84d;
+  --aurora-cyan: #00d4ff;
+
+  /* ---------- geometria ---------------------------------------- */
   --radius: 8px;
-  --radius-lg: 12px;
-  --shadow-sm: 0 1px 2px rgba(13, 42, 29, 0.06), 0 1px 3px rgba(13, 42, 29, 0.05);
-  --shadow-md: 0 2px 4px rgba(13, 42, 29, 0.05), 0 8px 20px rgba(13, 42, 29, 0.07);
-  --shadow-lg: 0 4px 8px rgba(13, 42, 29, 0.05), 0 18px 44px rgba(13, 42, 29, 0.11);
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(10, 37, 64, 0.06), 0 1px 3px rgba(10, 37, 64, 0.05);
+  --shadow-md: 0 2px 5px rgba(10, 37, 64, 0.06), 0 12px 24px rgba(10, 37, 64, 0.08);
+  --shadow-lg: 0 4px 10px rgba(10, 37, 64, 0.05), 0 22px 50px rgba(10, 37, 64, 0.12);
+  /* A sombra colorida da Stripe nos botões. */
+  --shadow-indigo: 0 4px 14px rgba(99, 91, 255, 0.32);
 
-  /* ---------- layout ----------------------------------------------- */
+  /* ---------- layout ------------------------------------------- */
   --container: 1140px;
   --gutter: clamp(20px, 4vw, 40px);
 
-  /* ---------- ritmo vertical ----------------------------------------
-     "Aqui tem espaço gigantesco." Era clamp(92px, 10vw, 168px). */
   --band: clamp(64px, 6.4vw, 96px);
-  --band-lg: clamp(76px, 7.4vw, 112px);
+  --band-lg: clamp(76px, 7.4vw, 116px);
 
-  /* ---------- tipografia --------------------------------------------
-     "Muito muito grande, em exagero. Deixar pouquinho mais curto,
-     fonte menor." O h1 era clamp(44px, 5.4vw, 80px). */
+  /* ---------- tipografia --------------------------------------- */
   --font-display: Archivo, Inter, -apple-system, "Segoe UI", Arial, sans-serif;
   --font-body: Inter, -apple-system, "Segoe UI", Arial, sans-serif;
 
-  --fs-display: clamp(35px, 3.9vw, 58px);  /* h1 */
+  --fs-display: clamp(35px, 3.9vw, 58px);
   --fs-h2: clamp(28px, 2.9vw, 42px);
-  --fs-h3: 19px;                            /* título de caixinha */
+  --fs-h3: 19px;
   --fs-number: clamp(46px, 5.2vw, 76px);
   --fs-lead: clamp(17px, 1.25vw, 19px);
   --fs-body: 16px;
@@ -177,9 +167,6 @@
   --ls-h2: -0.024em;
   --ls-eyebrow: 0.075em;
 
-  /* ---------- motion ------------------------------------------------
-     O movimento voltou: marquee de logos, nome da ferramenta
-     alternando, entrada suave no scroll. Nada que pisque ou pulse. */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --dur: 0.6s;
 }

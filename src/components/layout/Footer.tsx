@@ -1,5 +1,16 @@
 import { FOOTER_COLUMNS, LINKS } from "../../data/site";
 
+/**
+ * ⚠️ BUG ENCONTRADO AQUI, TAMBÉM PRESENTE NA BRANCH PRINCIPAL:
+ * este footer tem fundo CLARO (`background: var(--surface)`), mas
+ * usava `/brand/playbooklab-logo.svg`, que é a versão feita para fundo
+ * escuro — a tinta dela é #F7FFE6, quase branco. O logo estava
+ * praticamente invisível no footer.
+ *
+ * Corrigido aqui para a variante de fundo claro. A mesma troca precisa
+ * ser feita em redesign/stripe-register, trocando por
+ * /brand/playbooklab-logo-light.svg.
+ */
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -9,7 +20,7 @@ export function Footer() {
         <div className="footer-brand">
           <a href={LINKS.site} aria-label="Playbook Lab — página inicial">
             <img
-              src="/brand/playbooklab-logo.svg"
+              src="/brand/playbooklab-logo-experimento.svg"
               alt="Playbook Lab"
               width={52}
               height={44}
