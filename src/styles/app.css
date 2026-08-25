@@ -723,24 +723,60 @@ a:hover > .btn-arrow {
 }
 
 .stat-row > div {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
   padding: clamp(30px, 3.2vw, 44px) 22px;
   text-align: center;
+}
+
+/* ---------- o hover da referência ----------
+   Não é o fundo que clareia nem o número que sobe: são os DOIS FILETES
+   da célula — o de cima e o de baixo — que acendem num degradê que
+   desvanece nas pontas. O conteúdo não se move. É por isso que lê como
+   sutil, e é o único lugar da página onde o verde de marca cheio
+   aparece sobre fundo claro (filete de 2px é decorativo, não texto,
+   então não responde a regra de contraste).
+
+   Os dois ficam em -1px para cobrir exatamente o filete da banda, e
+   entram crescendo do centro em vez de só aparecer — é o que dá a
+   sensação de traço desenhado. */
+.stat-row > div::before,
+.stat-row > div::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(20, 193, 20, 0.15) 18%,
+    var(--accent-live) 50%,
+    rgba(20, 193, 20, 0.15) 82%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: scaleX(0.55);
   transition:
-    background 0.3s var(--ease),
-    transform 0.3s var(--ease);
+    opacity 0.35s var(--ease),
+    transform 0.45s var(--ease);
 }
 
-/* O hover leve da referência: a célula clareia e o número sobe 2px. */
-.stat-row > div:hover {
-  background: rgba(255, 255, 255, 0.66);
+.stat-row > div::before {
+  top: -1px;
 }
 
-.stat-row > div:hover dt {
-  transform: translateY(-2px);
+.stat-row > div::after {
+  bottom: -1px;
+}
+
+.stat-row > div:hover::before,
+.stat-row > div:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .stat-row dt {
@@ -751,7 +787,6 @@ a:hover > .btn-arrow {
   letter-spacing: -0.038em;
   color: var(--accent);
   font-variant-numeric: lining-nums tabular-nums;
-  transition: transform 0.3s var(--ease);
 }
 
 .stat-row dd {
@@ -1207,6 +1242,12 @@ a:hover > .btn-arrow {
   .marquee-track,
   .hero-tool > span {
     animation: none;
+  }
+
+  /* O filete continua acendendo no hover — só não cresce. */
+  .stat-row > div::before,
+  .stat-row > div::after {
+    transform: none;
   }
 
   .marquee {
