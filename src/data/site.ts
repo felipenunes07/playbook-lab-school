@@ -177,51 +177,31 @@ export const TAILORED = {
   eyebrow: "Personalização",
   headline: ["Personalizado", "para a sua realidade."],
   lead: "Cada treinamento é desenhado em cima do que sua equipe já tem em mão. Suas ferramentas, seus processos, seus casos de uso. Nada de exemplo genérico.",
-  /* Cada coluna carrega uma lista concreta. Sem ela, dois dos três
-     cards ficavam com título + três linhas e um buraco embaixo — o
-     "espaço em branco sem nada" que o Victor rejeita. A lista não é
-     enchimento: responde a pergunta que o card levanta.
+  /* Cada coluna: título, um parágrafo, e UMA linha de detalhe.
+     Nada de lista vertical com marca em cada item.
 
-     Os dados de `cases` e `level` já existiam no projeto (as áreas de
-     aplicação do hero antigo e a escada de maturidade) e tinham sido
-     descartados numa versão anterior. */
+     A versão com lista tinha 13 filetes e 13 checks na tela para dizer
+     o que três frases dizem. O detalhe em prosa mantém o conteúdo
+     concreto — as ferramentas, as áreas, os níveis — e tira a maior
+     parte das linhas. */
   columns: [
     {
       key: "tools",
       title: "Suas ferramentas.",
-      body: "Cada demo e cada exercício roda nas ferramentas de IA e no stack que sua equipe já usa todo dia.",
-      listLabel: "Cobrimos",
-      items: [
-        { label: "Claude" },
-        { label: "ChatGPT" },
-        { label: "Gemini" },
-        { label: "Copilot" },
-        { label: "Google Workspace" },
-        { label: "Microsoft 365" },
-      ],
+      body: "Cada demo e cada exercício roda no stack que sua equipe já usa todo dia.",
+      detail: "Claude · ChatGPT · Gemini · Copilot · Google Workspace · Microsoft 365",
     },
     {
       key: "cases",
       title: "Seus casos de uso.",
-      body: "O programa é ajustado aos workflows e processos reais do time — não a exemplos de aula.",
-      listLabel: "Exemplos de aplicação",
-      items: [
-        { label: "Operações", note: "Tarefa manual → workflow com IA" },
-        { label: "Conhecimento", note: "Documentos dispersos → contexto consultável" },
-        { label: "Comercial", note: "Informação solta → decisão assistida" },
-      ],
+      body: "Os exercícios partem de workflows e processos reais do time, não de exemplos de aula.",
+      detail: "Tarefa manual vira workflow. Documento disperso vira contexto consultável. Informação solta vira decisão assistida.",
     },
     {
       key: "level",
       title: "Seu nível.",
-      body: "Encontramos cada participante onde ele está — numa turma com níveis misturados, cada um sai de onde parou.",
-      listLabel: "Trilhas por nível",
-      items: [
-        { label: "Iniciante", note: "Fundamentos e uso diário" },
-        { label: "Intermediário", note: "Contexto e Skills" },
-        { label: "Avançado", note: "Workflows e automações" },
-        { label: "Builder", note: "Agentes e ferramentas internas" },
-      ],
+      body: "Numa turma com níveis misturados, cada participante sai de onde parou.",
+      detail: "Iniciante · Intermediário · Avançado · Builder — quatro trilhas dentro do mesmo programa.",
     },
   ],
 } as const;

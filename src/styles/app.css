@@ -867,82 +867,316 @@ a:hover > .btn-arrow {
 }
 
 /* ============================================================
-   04 · PERSONALIZAÇÃO — faixas numeradas
+   04 · PERSONALIZAÇÃO — uma banda, três colunas
 
-   Ritmo diferente de Programas de propósito: lá são três cards
-   atravessando a tela, aqui são três faixas descendo. Sem card,
-   sem sombra, sem raio. Duas seções adjacentes com o mesmo
-   componente liam como a mesma seção duas vezes.
+   Terceira forma desta seção; as duas anteriores foram recusadas
+   (três cards com lista, e três faixas numeradas). Esta usa o
+   vocabulário da banda de números: filete horizontal de borda a
+   borda, ZERO filete vertical, respiro grande, hover verde.
+
+   Não ecoa a Autoridade porque lá a banda é centrada e carrega
+   números gigantes; aqui é à esquerda e carrega prosa.
    ============================================================ */
 
-.lanes {
-  margin-top: clamp(40px, 4.4vw, 58px);
+.aspect-band {
+  margin-top: clamp(40px, 4.4vw, 60px);
   border-top: 1px solid var(--line);
-}
-
-.lane {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 0.36fr) minmax(0, 0.64fr);
-  gap: 24px clamp(28px, 4vw, 60px);
-  padding-block: clamp(30px, 3.4vw, 46px);
   border-bottom: 1px solid var(--line);
 }
 
-.lane-num {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
+.aspect-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 64px);
 }
 
-.lane-title {
-  font-family: var(--font-display);
-  font-size: clamp(21px, 2vw, 27px);
-  font-weight: 600;
-  line-height: 1.16;
-  letter-spacing: -0.024em;
+.aspect-row > article {
+  position: relative;
+  padding-block: clamp(34px, 3.6vw, 52px);
 }
 
-.lane-copy p {
-  max-width: 38ch;
-  margin-top: 12px;
+/* O mesmo hover da banda de números: acende os dois filetes num
+   degradê que desvanece nas pontas, crescendo do centro. O conteúdo
+   não se move. */
+.aspect-row > article::before,
+.aspect-row > article::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(20, 193, 20, 0.15) 18%,
+    var(--accent-live) 50%,
+    rgba(20, 193, 20, 0.15) 82%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: scaleX(0.55);
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.45s var(--ease);
+}
+
+.aspect-row > article::before {
+  top: -1px;
+}
+
+.aspect-row > article::after {
+  bottom: -1px;
+}
+
+.aspect-row > article:hover::before,
+.aspect-row > article:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.aspect-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+}
+
+.aspect-body {
+  max-width: 34ch;
+  margin-top: 14px;
   font-size: var(--fs-sm);
   line-height: 1.62;
+  color: var(--ink-soft);
+}
+
+/* A linha de detalhe: é onde o conteúdo concreto vive, em tinta fraca
+   para não competir com o parágrafo. */
+.aspect-detail {
+  max-width: 34ch;
+  margin-top: 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
   color: var(--muted);
 }
 
-/* A régua horizontal de itens. Em largura cheia ela cabe numa linha,
-   e no caso dos níveis isso transforma a lista numa progressão
-   legível — informação, não diagrama decorativo. */
-.lane-scale ul {
+/* ============================================================
+   05 · AUTORIDADE
+   O formato da seção da Stripe que o Victor chamou de "linda":
+   título centralizado, frase curta, e uma fileira de números.
+   Sem o gráfico generativo que acompanha a original — "parece
+   ouriço do mar, pô".
+   ============================================================ */
+
+.authority {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mesmo gesto do hero, em verde de marca: é a identidade, não
+   decoração solta. */
+.authority-wash {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    radial-gradient(56% 62% at 50% 8%, rgba(20, 193, 20, 0.13), transparent 70%),
+    radial-gradient(46% 54% at 16% 42%, rgba(96, 214, 168, 0.11), transparent 72%),
+    radial-gradient(44% 52% at 84% 36%, rgba(13, 125, 60, 0.1), transparent 74%);
+}
+
+.authority-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.authority-story {
+  margin-top: clamp(44px, 5vw, 72px);
+}
+
+.authority-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.authority-title {
+  max-width: 17ch;
+}
+
+.authority-head .lead {
+  max-width: 56ch;
+}
+
+/* ---------- a régua de números ----------
+   Comparada lado a lado com a referência, três coisas faziam a nossa
+   parecer mais pesada:
+
+   1. Filete VERTICAL entre as células. A referência não tem nenhum —
+      era exatamente a "margem feia". Saiu.
+   2. Os filetes horizontais paravam na largura do container e eram
+      `--line-strong`. Agora correm de borda a borda da tela e usam o
+      filete mais leve.
+   3. Peso 600 no número. A referência usa peso leve; 500 já tira a
+      sensação de bloco.
+
+   E ganhou o hover suave que a referência tem. */
+
+.stat-band {
+  margin-top: clamp(38px, 4.2vw, 56px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.stat-row {
   display: grid;
-  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
-  gap: 20px 22px;
-  margin-top: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.lane-scale li {
-  padding-top: 12px;
-  border-top: 1px solid var(--line-strong);
+.stat-row > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(30px, 3.2vw, 44px) 22px;
+  text-align: center;
 }
 
-.lane-scale strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.012em;
-  color: var(--ink);
+/* ---------- o hover da referência ----------
+   Não é o fundo que clareia nem o número que sobe: são os DOIS FILETES
+   da célula — o de cima e o de baixo — que acendem num degradê que
+   desvanece nas pontas. O conteúdo não se move. É por isso que lê como
+   sutil, e é o único lugar da página onde o verde de marca cheio
+   aparece sobre fundo claro (filete de 2px é decorativo, não texto,
+   então não responde a regra de contraste).
+
+   Os dois ficam em -1px para cobrir exatamente o filete da banda, e
+   entram crescendo do centro em vez de só aparecer — é o que dá a
+   sensação de traço desenhado. */
+.stat-row > div::before,
+.stat-row > div::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(20, 193, 20, 0.15) 18%,
+    var(--accent-live) 50%,
+    rgba(20, 193, 20, 0.15) 82%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: scaleX(0.55);
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.45s var(--ease);
 }
 
-.lane-scale em {
-  display: block;
-  margin-top: 4px;
-  font-size: 13px;
-  font-style: normal;
-  line-height: 1.45;
+.stat-row > div::before {
+  top: -1px;
+}
+
+.stat-row > div::after {
+  bottom: -1px;
+}
+
+.stat-row > div:hover::before,
+.stat-row > div:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.stat-row dt {
+  font-family: var(--font-display);
+  font-size: var(--fs-number);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.038em;
+  color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.stat-row dd {
+  max-width: 24ch;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
   color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* A foto e o argumento, embaixo da régua de números. */
+.authority-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 4.4vw, 64px);
+  align-items: center;
+}
+
+.authority-figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-lg);
+}
+
+.authority-figure img {
+  width: 100%;
+  height: clamp(300px, 34vw, 440px);
+  object-fit: cover;
+}
+
+.authority-figure figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 48px 22px 20px;
+  background: linear-gradient(
+    to top,
+    rgba(8, 40, 26, 0.94) 0%,
+    rgba(8, 40, 26, 0.76) 58%,
+    rgba(8, 40, 26, 0) 100%
+  );
+  color: var(--on-dark);
+  font-size: var(--fs-sm);
+}
+
+.authority-para {
+  max-width: 52ch;
+  color: var(--ink-soft);
+}
+
+.authority-para + .authority-para {
+  margin-top: 18px;
+}
+
+.authority-quote {
+  margin-top: 26px;
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+  font-size: 17px;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   04 / 06 · CAIXINHAS ESPECÍFICAS
+   ============================================================ */
+
+/* A `.spec` dentro de um card ganha filete de separação do texto. */
+.card .spec {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
 
 .teaching-card {
@@ -1271,14 +1505,14 @@ a:hover > .btn-arrow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* A faixa perde a coluna do número: ele sobe para cima do título. */
-  .lane {
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 18px clamp(20px, 3vw, 32px);
+  /* A banda vira uma coluna, e cada aspecto ganha filete próprio. */
+  .aspect-row {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  .lane-scale {
-    grid-column: 2;
+  .aspect-row > article + article {
+    border-top: 1px solid var(--line);
   }
 
   .footer-inner {
@@ -1321,18 +1555,9 @@ a:hover > .btn-arrow {
     grid-template-columns: 1fr;
   }
 
-  .lane {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .lane-scale {
-    grid-column: 1;
-  }
-
-  /* Quatro níveis lado a lado não caberiam a 375px. */
-  .lane-scale ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  .aspect-body,
+  .aspect-detail {
+    max-width: 100%;
   }
 
   .footer-columns {
@@ -1349,7 +1574,9 @@ a:hover > .btn-arrow {
 
   /* O filete continua acendendo no hover — só não cresce. */
   .stat-row > div::before,
-  .stat-row > div::after {
+  .stat-row > div::after,
+  .aspect-row > article::before,
+  .aspect-row > article::after {
     transform: none;
   }
 

@@ -1,26 +1,26 @@
 import { Reveal } from "../ui/Reveal";
 import { TAILORED } from "../../data/site";
 
-/** Quantas colunas a régua de cada faixa usa. */
-const COLS: Record<string, number> = { tools: 3, cases: 3, level: 4 };
-
 /**
- * Três FAIXAS numeradas, não três cards.
+ * Uma banda de borda a borda, três colunas, nada mais.
  *
- * A versão anterior usava a mesma `.card` de Programas: três cards
- * brancos em fila, título, parágrafo, filete, label e lista com check.
- * Colada embaixo de Programas, lia como a mesma seção duas vezes — a
- * segunda não acrescentava nada visualmente.
+ * Terceira forma desta seção. As duas anteriores foram recusadas:
  *
- * O erro foi meu de sistema: escrevi em base.css que "toda seção repete
- * a fórmula" e apliquei à letra. A repetição organiza quando as seções
- * estão separadas; em duas seções adjacentes ela vira eco.
+ *  1. Três cards com lista e check — lia como Programas duas vezes.
+ *  2. Três faixas numeradas — recusada também.
  *
- * Aqui o ritmo muda: sai "três cards atravessando" e entra "três faixas
- * descendo", numeradas, sem card e sem sombra. É o formato que o Victor
- * elogiou na call ("sessões tipo ponto dois, ponto três, ponto quatro").
- * E a largura cheia deixa cada conjunto de itens virar uma régua
- * horizontal — no caso dos níveis, uma progressão de verdade.
+ * Esta usa o único vocabulário aprovado nesta página: a banda de
+ * números da Autoridade. Filetes horizontais correndo de borda a borda,
+ * ZERO filete vertical (o "margem feia"), respiro grande, e o hover que
+ * acende o filete verde.
+ *
+ * Não ecoa a Autoridade porque lá a banda é centrada e carrega números
+ * gigantes; aqui é alinhada à esquerda e carrega título e prosa.
+ *
+ * Cada coluna tem três blocos de texto e nada além: título, parágrafo,
+ * linha de detalhe. Sem card, sem borda, sem número, sem marca de item.
+ * A versão com lista usava 13 filetes e 13 checks para dizer o que três
+ * frases dizem.
  */
 export function Tailored() {
   return (
@@ -38,37 +38,20 @@ export function Tailored() {
           </h2>
           <p className="lead">{TAILORED.lead}</p>
         </Reveal>
-
-        <ol className="lanes">
-          {TAILORED.columns.map((column, index) => (
-            <Reveal as="li" key={column.key} className="lane" order={index % 2}>
-              <span className="lane-num" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-
-              <div className="lane-copy">
-                <h3 className="lane-title">{column.title}</h3>
-                <p>{column.body}</p>
-              </div>
-
-              <div className="lane-scale">
-                <p className="spec-label">{column.listLabel}</p>
-                <ul
-                  aria-label={`${column.listLabel} — ${column.title}`}
-                  style={{ ["--cols" as string]: COLS[column.key] ?? 3 }}
-                >
-                  {column.items.map((item) => (
-                    <li key={item.label}>
-                      <strong>{item.label}</strong>
-                      {"note" in item && item.note ? <em>{item.note}</em> : null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
       </div>
+
+      {/* Fora do container: os filetes correm de borda a borda. */}
+      <Reveal className="aspect-band">
+        <div className="container aspect-row">
+          {TAILORED.columns.map((column) => (
+            <article key={column.key}>
+              <h3 className="aspect-title">{column.title}</h3>
+              <p className="aspect-body">{column.body}</p>
+              <p className="aspect-detail">{column.detail}</p>
+            </article>
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }
