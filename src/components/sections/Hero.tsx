@@ -1,129 +1,101 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/Button";
-import { ToolMark, TOOLS } from "../ui/ToolMark";
-import { CTA, CONTACT_URL, HERO } from "../../data/site";
+import { CLIENT_LOGOS, CTA, CONTACT_URL, HERO } from "../../data/site";
+import { TOOLS } from "../ui/tools";
 
-const ROTATE_MS = 3400;
-
-const APPLICATIONS = [
-  { area: "Operações", from: "Tarefa manual", to: "Workflow com IA" },
-  { area: "Conhecimento", from: "Documentos dispersos", to: "Contexto consultável" },
-  { area: "Times comerciais", from: "Informação solta", to: "Decisão assistida" },
-] as const;
+const HERO_LOGOS = CLIENT_LOGOS.slice(0, 6);
 
 export function Hero() {
-  const [index, setIndex] = useState(0);
-  const tool = TOOLS[index];
+  const [toolIndex, setToolIndex] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => {
-      if (!document.hidden) setIndex((i) => (i + 1) % TOOLS.length);
-    }, ROTATE_MS);
-    return () => window.clearInterval(timer);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) return;
+
+    const interval = window.setInterval(() => {
+      if (!document.hidden) setToolIndex((current) => (current + 1) % TOOLS.length);
+    }, 3200);
+
+    return () => window.clearInterval(interval);
   }, []);
+
+  const activeTool = TOOLS[toolIndex];
 
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <div className="hero-shell">
-        <div className="container hero-inner">
-          <div className="hero-atmosphere" aria-hidden="true">
-            <span className="hero-orbit hero-orbit--outer"><i /><i /><i /></span>
-            <span className="hero-orbit hero-orbit--inner"><i /><i /></span>
-          </div>
-          <p className="eyebrow hero-eyebrow">
-            <span className="hero-eyebrow-dot" aria-hidden="true" />
-            {HERO.eyebrow}
-          </p>
-
+      <div className="container hero-grid">
+        <div className="hero-copy">
+          <p className="eyebrow">{HERO.eyebrow}</p>
           <h1 id="hero-title" className="display hero-title">
-            <span className="visually-hidden">{HERO.headlineA11y}</span>
+            <span className="visually-hidden">{HERO.headline}</span>
             <span aria-hidden="true">
-              <span className="hero-line hero-line--tool">
-                {HERO.headlineBefore}{" "}
+              <span className="hero-title-use">
+                Sua equipe já usa{" "}
                 <span
-                  className="tool-chip"
-                  style={{ ["--tool" as string]: tool.colorInk }}
+                  className="hero-tool"
+                  key={activeTool.id}
+                  style={{ color: activeTool.colorInk }}
                 >
-                  <ToolMark tool={tool.id} size={30} />
-                  <span key={tool.id}>{tool.label}</span>
+                  {activeTool.label}.
                 </span>
               </span>
-              <span className="hero-line">{HERO.headlineAfter}</span>
-              <span className="hero-line hero-line--payoff">{HERO.headlineRoi}</span>
+              <span className="hero-title-outcome">Agora transforme isso em resultado.</span>
             </span>
           </h1>
-
-          <p className="lead hero-sub">{HERO.subheadline}</p>
+          <p className="lead hero-lead">{HERO.subheadline}</p>
 
           <div className="hero-actions">
-            <Button href={CONTACT_URL} variant="primary">
-              {CTA.primary}
-            </Button>
-            <Button href="#programas" variant="secondary">
-              {CTA.secondary}
-            </Button>
+            <Button href={CONTACT_URL} variant="primary">{CTA.primary}</Button>
+            <a className="hero-secondary" href="#programas">{CTA.secondary}</a>
           </div>
           <p className="hero-micro">{HERO.microcopy}</p>
-
-          <div className="hero-tool-rail" aria-label="Ferramentas compatíveis">
-            {TOOLS.map((item, itemIndex) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`hero-tool ${itemIndex === index ? "is-active" : ""}`}
-                onClick={() => setIndex(itemIndex)}
-                aria-pressed={itemIndex === index}
-                style={{ ["--tool" as string]: item.colorInk }}
-              >
-                <ToolMark tool={item.id} size={18} />
-                <span>{item.label}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="hero-dossier" aria-label="Estrutura do programa in-company">
-            <div className="hero-dossier-head">
-              <span>PL / PROGRAMA IN-COMPANY</span>
-              <strong><i aria-hidden="true" /> Mandato de transformação</strong>
-              <span>CONFIDENCIAL / 01</span>
-            </div>
-            <div className="hero-dossier-grid">
-              <article>
-                <span>01 / DIAGNÓSTICO</span>
-                <strong>Onde a IA muda o trabalho</strong>
-                <p>Ferramentas, processos e oportunidades priorizadas.</p>
-              </article>
-              <article>
-                <span>02 / CAPACITAÇÃO</span>
-                <strong>Aprendizado sobre casos reais</strong>
-                <p>Sessões construídas com o contexto da sua equipe.</p>
-              </article>
-              <article>
-                <span>03 / IMPLEMENTAÇÃO</span>
-                <strong>Capacidade em operação</strong>
-                <p>Skills, workflows e agentes que continuam em uso.</p>
-              </article>
-            </div>
-            <div className="hero-dossier-foot" aria-hidden="true">
-              <span>SUA OPERAÇÃO</span><i>→</i><span>CAPACIDADE INSTALADA</span><i>→</i><strong>ROI</strong>
-            </div>
-          </div>
         </div>
 
-        <div className="container application-strip">
-          <span className="visually-hidden">Exemplos de aplicação: tarefa manual em workflow com IA, documentos dispersos em contexto consultável e informação solta em decisão assistida.</span>
-          <p aria-hidden="true">Exemplos de aplicação</p>
-          <div className="application-live" key={APPLICATIONS[index].area} aria-hidden="true">
-            <span>{APPLICATIONS[index].area}</span>
-            <strong>{APPLICATIONS[index].from}</strong>
-            <i>→</i>
-            <strong>{APPLICATIONS[index].to}</strong>
+        <div
+          className="education-visual"
+          role="img"
+          aria-label="Composição visual de um treinamento in-company da Playbook Lab, do contexto real à aplicação no trabalho"
+        >
+          <div className="education-fold education-fold--one" aria-hidden="true" />
+          <div className="education-fold education-fold--two" aria-hidden="true" />
+
+          <div className="education-brand" aria-hidden="true">
+            <img src="/brand/playbooklab-logo-light.svg" alt="" />
+            <small>EDUCAÇÃO CORPORATIVA</small>
           </div>
-          <div className="application-tool" aria-hidden="true" style={{ ["--tool" as string]: tool.colorInk }}>
-            <ToolMark tool={tool.id} size={17} />
-            <span>{tool.label} em contexto</span>
+
+          <div className="education-board" aria-hidden="true">
+            <span className="education-status"><i /> AULA EM ANDAMENTO</span>
+            <strong>Treinamento<br />in-company</strong>
+            <p>IA aplicada aos processos da sua equipe.</p>
           </div>
+
+          <div className="education-route" aria-hidden="true">
+            <span className="education-route-label">DA AULA AO TRABALHO</span>
+            <ol>
+              <li><span>01</span><strong>Contexto real</strong></li>
+              <li><span>02</span><strong>Prática guiada</strong></li>
+              <li><span>03</span><strong>Aplicação</strong></li>
+            </ol>
+          </div>
+
+          <div className="education-tags" aria-hidden="true">
+            <span>AO VIVO</span><span>POR ÁREA</span><span>HANDS-ON</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="proof" role="group" aria-labelledby="proof-title">
+        <div className="container proof-inner">
+          <div className="proof-copy">
+            <p className="eyebrow">Experiência em implementação</p>
+            <h2 id="proof-title">Clientes de implementação — a base prática do que ensinamos.</h2>
+          </div>
+          <ul className="logo-grid" aria-label="Empresas atendidas em projetos de implementação pela Playbook Lab">
+            {HERO_LOGOS.map((src) => (
+              <li key={src}><img src={src} alt="" loading="eager" decoding="async" /></li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

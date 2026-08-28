@@ -1,46 +1,37 @@
 import { Reveal } from "../ui/Reveal";
-import { TESTIMONIALS } from "../../data/site";
+import { TESTIMONIALS, TESTIMONIALS_HEAD } from "../../data/site";
 
 /**
- * Built, but renders nothing while TESTIMONIALS is empty. The project
- * contains no real client quotes, and a landing page must not ship
- * fabricated ones. Add entries to src/data/site.ts and the section
- * appears with no further changes.
+ * Depoimentos. Victor, olhando o site de um concorrente na call:
+ * "mas olha, depoimentos é legal, essa parte toda tem [os
+ * depoimentos] deles palestrando".
+ *
+ * RENDERIZA NULL enquanto `TESTIMONIALS` estiver vazio — nenhuma
+ * citação inventada entra no ar. Para ligar: preencher o array em
+ * src/data/site.ts com quote, nome, cargo e empresa reais.
  */
 export function Testimonials() {
   if (TESTIMONIALS.length === 0) return null;
 
   return (
-    <section className="band band--lg band--sand" id="clientes" aria-labelledby="testimonials-title">
+    <section className="quotes band band--lg" aria-labelledby="quotes-title">
       <div className="container">
-        <header className="section-head">
-          <p className="eyebrow">Clientes</p>
-          <h2 id="testimonials-title" className="h2">
-            O que nossos clientes dizem.
-          </h2>
-        </header>
+        <Reveal className="section-head">
+          <p className="eyebrow">{TESTIMONIALS_HEAD.eyebrow}</p>
+          <h2 id="quotes-title" className="h2">{TESTIMONIALS_HEAD.headline}</h2>
+        </Reveal>
 
-        <ul className="testimonials-grid">
-          {TESTIMONIALS.map((item, i) => (
-            <Reveal key={item.name} as="li" order={i} className="testimonial-card">
-              <figure>
-                <p className="testimonial-highlight">{item.highlight}</p>
-                <blockquote className="testimonial-quote">{item.quote}</blockquote>
-                <figcaption className="testimonial-author">
-                  {item.avatar ? (
-                    <img src={item.avatar} alt="" width={44} height={44} loading="lazy" />
-                  ) : null}
-                  <span>
-                    <strong>{item.name}</strong>
-                    <em>
-                      {item.role}, {item.company}
-                    </em>
-                  </span>
-                </figcaption>
-              </figure>
+        <div className="cards" style={{ ["--cols" as string]: Math.min(TESTIMONIALS.length, 3) }}>
+          {TESTIMONIALS.map((item, index) => (
+            <Reveal as="figure" key={item.name} className="card quote" order={index}>
+              <blockquote>{item.quote}</blockquote>
+              <figcaption>
+                <strong>{item.name}</strong>
+                <span>{item.role} · {item.company}</span>
+              </figcaption>
             </Reveal>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

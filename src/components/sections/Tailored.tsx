@@ -1,42 +1,27 @@
 import { Reveal } from "../ui/Reveal";
 import { TAILORED } from "../../data/site";
 
-/**
- * A principal quebra de ritmo da página: a única banda quase preta.
- * Grid visível no fundo, headline em escala grande, três colunas com
- * régua de acento. Sem diagrama — a copy já faz o argumento.
- */
 export function Tailored() {
   return (
-    <section
-      className="band band--xl band--dark tailored"
-      id="como-funciona"
-      aria-labelledby="tailored-title"
-    >
-
+    <section className="method band band--surface" id="como-funciona" aria-labelledby="method-title">
       <div className="container">
-        <header className="section-head">
+        <Reveal className="section-head method-head">
           <p className="eyebrow">{TAILORED.eyebrow}</p>
-          <h2 id="tailored-title" className="h2 stacked-title tailored-title">
-            {TAILORED.headline.map((line, i) => (
-              <span key={line} className={i === 1 ? "is-muted" : undefined}>
-                {line}
-              </span>
-            ))}
+          <h2 id="method-title" className="h2">
+            {TAILORED.headline[0]} <span>{TAILORED.headline[1]}</span>
           </h2>
           <p className="lead">{TAILORED.lead}</p>
-        </header>
+        </Reveal>
 
-        <ul className="tailored-cols">
-          {TAILORED.columns.map((column, i) => (
-            <Reveal key={column.title} as="li" order={i} className="tailored-col">
-              <span className="tailored-col-rule" aria-hidden="true" />
-              <span className="mono-label">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="tailored-col-title">{column.title}</h3>
-              <p className="tailored-col-body">{column.body}</p>
+        <ol className="method-steps">
+          {TAILORED.steps.map((step, index) => (
+            <Reveal as="li" key={step.title} order={index}>
+              <span className="method-number">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
             </Reveal>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );

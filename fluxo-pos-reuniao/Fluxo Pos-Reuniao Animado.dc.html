@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  html, body { margin: 0; padding: 0; background: #e9ebef; }
+  body { min-height: 100vh; }
+  a { color: #e86038; text-decoration: none; }
+  a:hover { color: #c74e2c; }
+</style>
+<script>window.OM_SCENES = '[{"name":"Titulo","dur":1.8,"desc":"O título entra em duas linhas com o subtítulo abaixo"},{"name":"Reuniao","dur":1.1,"desc":"O badge REUNIÃO FINALIZADA aparece e o conector desce"},{"name":"Tldv","dur":1.4,"desc":"O card do tl;dv entra e o conector segue até o Claude"},{"name":"Claude","dur":1.6,"desc":"O card central do Claude entra com o símbolo laranja abrindo e pulsando"},{"name":"Saidas","dur":2.6,"desc":"As três linhas se abrem juntas e Pipedrive, Gmail e ClickUp entram em sequência curta"},{"name":"Fecho","dur":1.4,"desc":"A frase de fechamento e a assinatura aparecem"},{"name":"Leitura","dur":3.2,"desc":"Composição completa parada para leitura, com o símbolo do Claude pulsando"}]';</script>
+<script src="./image-slot.js"></script>
+<script src="./slot-frame-patch.js"></script>
+<script>window.OM_PLAYBACK = '{"mode":"loop"}';</script>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 20px;box-sizing:border-box">
+  <div style="flex:0 0 auto;box-shadow:0 1px 3px rgba(15,30,60,.06),0 14px 44px rgba(15,30,60,.10)">
+    <x-import component-from-global-scope="PosReuniaoAnimation" from="./animations-v3.jsx ./pos-reuniao-scene.jsx?v=9" accent="{{ accent }}" burst="{{ burst }}" show-grid="{{ showGrid }}" show-connectors="{{ showConnectors }}" hint-size="864px,1080px"></x-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#e86038&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#e86038&quot;,&quot;#10265a&quot;,&quot;#2aa85b&quot;,&quot;#7b3fd4&quot;],&quot;section&quot;:&quot;Aparência&quot;},&quot;burst&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#d97757&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#d97757&quot;,&quot;#e86038&quot;,&quot;#c9603f&quot;],&quot;section&quot;:&quot;Aparência&quot;},&quot;showGrid&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Aparência&quot;},&quot;showConnectors&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Aparência&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#e86038',
+      burst: this.props.burst ?? '#d97757',
+      showGrid: this.props.showGrid ?? true,
+      showConnectors: this.props.showConnectors ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -2,24 +2,26 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/Button";
 import { CTA, CONTACT_URL, LINKS, NAV_LINKS } from "../../data/site";
 
+/**
+ * Barra translúcida que só ganha filete e sombra depois do scroll.
+ *
+ * A barra de progresso de leitura não voltou: em página única é
+ * ansiedade decorativa, e vinha com glow verde.
+ */
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
+  // O filete e a sombra aparecem apenas depois do scroll.
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 8);
-      const available = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(available > 0 ? Math.min(window.scrollY / available, 1) : 0);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock the page behind the mobile sheet, and let Esc close it.
+  // Trava a página atrás da gaveta mobile, e Esc fecha.
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -36,17 +38,16 @@ export function Navbar() {
 
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-      <span className="site-progress" aria-hidden="true" style={{ transform: `scaleX(${progress})` }} />
       <div className="container header-inner">
         <a href={LINKS.site} className="brand" aria-label="Playbook Lab — página inicial">
           <img
-            src="/brand/playbooklab-logo-light.svg"
+            src="/brand/playbooklab-logo.svg"
             alt="Playbook Lab"
-            width={44}
-            height={37}
+            width={48}
+            height={41}
             className="brand-mark"
           />
-          <span className="brand-offer">IA para empresas</span>
+          <span className="brand-offer">Treinamento de IA</span>
         </a>
 
         <nav className="nav-center" aria-label="Navegação principal">
@@ -77,11 +78,7 @@ export function Navbar() {
         </div>
       </div>
 
-      <div
-        id="mobile-nav"
-        ref={panelRef}
-        className={`mobile-nav ${open ? "is-open" : ""}`}
-      >
+      <div id="mobile-nav" ref={panelRef} className={`mobile-nav ${open ? "is-open" : ""}`}>
         <nav aria-label="Navegação mobile">
           {NAV_LINKS.map((link) => (
             <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
