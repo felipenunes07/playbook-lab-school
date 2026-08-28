@@ -8,7 +8,7 @@ import { CTA, CONTACT_URL, FINAL_CTA } from "../../data/site";
  */
 export function FinalCTA() {
   return (
-    <section className="final band band--lg band--dark" aria-labelledby="final-title">
+    <section className="final band" aria-labelledby="final-title">
       <div className="container final-inner">
         <Reveal className="final-copy">
           <p className="eyebrow">{FINAL_CTA.eyebrow}</p>

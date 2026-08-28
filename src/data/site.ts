@@ -29,25 +29,22 @@ export const LINKS = {
   services: "https://playbooklab.com.br/servicos/",
   /** Real */
   linkedin: "https://www.linkedin.com/company/playbooklab",
-  /** PLACEHOLDER — o canal existe (60+ aulas), mas a URL não foi
-      confirmada em nenhuma fonte do projeto. Enquanto for "#", o card
-      e o link de footer renderizam como texto, não como link. */
-  youtube: "#",
+  /** Aula pública real, verificada no YouTube em 28/08/2026. */
+  youtube: "https://www.youtube.com/watch?v=SGz7D5aL2gM",
 } as const;
 
 export const CONTACT_URL = LINKS.contact;
 
 export const CTA = {
   primary: "Falar com a Playbook",
-  secondary: "Ver os programas",
+  secondary: "Conhecer os programas",
 } as const;
 
 /* ---------- navegação ---------- */
 export const NAV_LINKS = [
-  { label: "O problema", href: "#problema" },
+  { label: "Por que treinar", href: "#por-que-treinar" },
   { label: "Programas", href: "#programas" },
-  { label: "Por que a Playbook", href: "#autoridade" },
-  { label: "Como ensinamos", href: "#conteudos" },
+  { label: "Sobre", href: "#sobre" },
 ] as const;
 
 /* ============================================================
@@ -58,15 +55,10 @@ export const NAV_LINKS = [
    ============================================================ */
 export const HERO = {
   eyebrow: "Treinamento corporativo de IA",
-  headlineBefore: "Você contratou",
-  headlineAfter: "para sua equipe.",
-  headlinePayoff: "Agora transforme isso em ROI.",
-  /** Versão linear para leitores de tela, já que o nome é animado. */
-  headlineA11y:
-    "Você contratou Claude, ChatGPT ou Gemini para sua equipe. Agora transforme isso em ROI.",
+  headline: "Sua equipe já tem IA. Agora transforme isso em resultado.",
   subheadline:
-    "Aplicamos treinamentos e workshops corporativos para que sua equipe extraia o máximo da IA que você já está pagando.",
-  microcopy: "Desenhamos o programa junto com a sua equipe.",
+    "Treinamentos corporativos para transformar o uso básico de IA em uma forma mais prática e consistente de trabalhar.",
+  microcopy: "Online ou in-company, sempre conectado ao trabalho da equipe.",
 } as const;
 
 /* ---------- prova silenciosa, logo abaixo do hero ----------
@@ -103,7 +95,8 @@ export const PROOF = {
    cada, para não virar bullet solto.
    ============================================================ */
 export const PROBLEM = {
-  eyebrow: "O problema",
+  eyebrow: "A dor é conhecida",
+  headline: "Você já passou por isso?",
   statement: ["Assinar a IA foi a parte fácil.", "Gerar resultado com ela é difícil."],
   lead: "A maioria dos fundadores e líderes está enfrentando o mesmo desafio: contrataram IA para o time e não estão vendo a performance melhorar.",
   symptoms: [
@@ -163,10 +156,30 @@ export const PROGRAMS = [
    abaixo. Na call o Victor pediu para fundir: a tese vira o título,
    e os três programas entram direto embaixo dela. */
 export const PROGRAMS_HEAD = {
-  eyebrow: "A virada",
-  headline: "Ferramenta sozinha não gera ROI.",
-  lead: "A IA que você contratou não dá retorno porque as pessoas ainda não sabem aplicar no trabalho que fazem todo dia. Construímos treinamentos corporativos para capacitar equipes e líderes nas habilidades de IA.",
-  cta: "Ver programa",
+  eyebrow: "Como a Playbook resolve",
+  headline: "Treinamento para cada etapa da sua equipe.",
+  lead: "Ter acesso à ferramenta não basta. A Playbook transforma conhecimento solto em prática aplicada — do fundamento à implementação.",
+  cta: "Conversar sobre este programa",
+} as const;
+
+export const WHY_TRAIN = {
+  eyebrow: "Por que treinar sua equipe",
+  headline: "Disponibilizar a ferramenta foi só o começo.",
+  lead: "O resultado aparece quando a equipe entende onde a IA entra e aprende a usá-la no trabalho que já faz.",
+  reasons: [
+    {
+      title: "Sair do uso básico.",
+      body: "A IA deixa de ser um chat de perguntas soltas e passa a apoiar tarefas de verdade.",
+    },
+    {
+      title: "Aplicar no processo real.",
+      body: "Exemplos e exercícios partem dos casos que já existem dentro da empresa.",
+    },
+    {
+      title: "Criar capacidade no time.",
+      body: "Mais pessoas ganham repertório para usar IA sem depender sempre do mesmo líder.",
+    },
+  ],
 } as const;
 
 /* ============================================================
@@ -174,9 +187,9 @@ export const PROGRAMS_HEAD = {
    As três colunas que o Victor escreveu em inglês, em PT-BR.
    ============================================================ */
 export const TAILORED = {
-  eyebrow: "Personalização",
-  headline: ["Personalizado", "para a sua realidade."],
-  lead: "Cada treinamento é desenhado em cima do que sua equipe já tem em mão. Suas ferramentas, seus processos, seus casos de uso. Nada de exemplo genérico.",
+  eyebrow: "Como funciona",
+  headline: ["Desenhado com o seu time,", "não para um time genérico."],
+  lead: "Suas ferramentas, seus casos e seu nível entram no método desde o começo.",
   /* Cada coluna: título, um parágrafo, e UMA linha de detalhe.
      Nada de lista vertical com marca em cada item.
 
@@ -204,6 +217,20 @@ export const TAILORED = {
       detail: "Iniciante · Intermediário · Avançado · Builder — quatro trilhas dentro do mesmo programa.",
     },
   ],
+  steps: [
+    {
+      title: "Entendemos o contexto.",
+      body: "Mapeamos as ferramentas, o nível e os desafios que a equipe encontra hoje.",
+    },
+    {
+      title: "Desenhamos o treinamento.",
+      body: "A trilha, os exemplos e os exercícios nascem desse contexto.",
+    },
+    {
+      title: "Praticamos no trabalho real.",
+      body: "A equipe aplica IA em processos e casos que já fazem parte da operação.",
+    },
+  ],
 } as const;
 
 /* ============================================================
@@ -211,7 +238,7 @@ export const TAILORED = {
    O número que o Victor confirmou (50+) entra aqui, grande.
    ============================================================ */
 export const AUTHORITY = {
-  eyebrow: "Por que a Playbook Lab",
+  eyebrow: "Sobre a Playbook Lab",
   headline: ["Quem ensina", "também implementa."],
   /** Frase curta sob o título centralizado, antes da fileira de números. */
   lead: "A Playbook Lab não nasceu como escola. Nasceu implementando IA dentro de operações reais — e é de lá que vem tudo o que ensinamos.",
@@ -226,8 +253,7 @@ export const AUTHORITY = {
     { value: "60+", label: "aulas e tutoriais publicados de graça" },
   ],
   body: [
-    "Já implementamos projetos de IA dentro de mais de 50 empresas — de pequenos negócios a líderes de mercado. Sabemos exatamente como a IA precisa ser usada para gerar impacto de verdade.",
-    "Viver o campo de batalha, tocando projetos de IA em operações grandes, foi o que nos deu a bagagem para fundar a escola.",
+    "A experiência vem de projetos dentro de operações reais. É isso que mantém cada aula prática, direta e conectada ao que muda no trabalho da equipe.",
   ],
   quote:
     "Não começamos perguntando quais funcionalidades ensinar. Começamos perguntando como o trabalho deveria funcionar com IA.",
@@ -245,18 +271,18 @@ export const AUTHORITY = {
    implementação.
    ============================================================ */
 export const TEACHING = {
-  eyebrow: "Ainda em dúvida?",
-  headline: "Conheça nosso modo de ensinar antes de contratar.",
-  lead: "Já educamos milhares de pessoas de graça, pelas nossas redes e pela comunidade. Nossa forma de ensinar está aberta — veja antes de levar para o seu time.",
+  eyebrow: "Nossa forma de ensinar",
+  headline: "Veja a Playbook em ação.",
+  lead: "Aulas abertas e comunidade complementam a prova prática, sem substituir a conversa sobre o treinamento da sua equipe.",
   /* Sem número aqui: 60+ e 2k+ subiram para a fileira única de
      Autoridade. Repetir os dois na mesma página enfraquece os dois
      lugares. O trabalho desta seção é o link, não a métrica. */
   items: [
     {
       kind: "YouTube",
-      title: "Aulas e tutoriais abertos.",
-      body: "Casos práticos de IA aplicada ao trabalho, publicados toda semana.",
-      cta: "Ver o canal",
+      title: "Uma aula prática, do início ao fim.",
+      body: "Veja como ensinamos a analisar chamadas com IA, sem código.",
+      cta: "Assistir à aula",
       href: LINKS.youtube,
     },
     {
@@ -274,9 +300,36 @@ export const TEACHING = {
    ============================================================ */
 export const FINAL_CTA = {
   eyebrow: "Próximo passo",
-  statement: ["Seu time está subutilizando a IA.", "E isso custa caro."],
-  body: "A cada mês que passa a fatura do cartão aumenta e a produtividade segue no mesmo lugar. Vamos resolver isso.",
-  microcopy: "Começamos entendendo a sua operação.",
+  statement: ["Vamos transformar IA", "em trabalho melhor feito?"],
+  body: "Conte o que sua equipe já usa, onde ela trava e qual resultado precisa alcançar.",
+  microcopy: "A conversa começa pela sua operação.",
+} as const;
+
+export const FAQ = {
+  eyebrow: "Dúvidas essenciais",
+  headline: "O que sua equipe precisa saber antes de começar.",
+  items: [
+    {
+      question: "A equipe precisa ter experiência com IA?",
+      answer: "Não existe um único ponto de entrada. O conteúdo é ajustado ao nível da equipe, do fundamento a quem já está construindo workflows e automações.",
+    },
+    {
+      question: "Quais ferramentas entram no treinamento?",
+      answer: "Trabalhamos com as ferramentas que a empresa já usa, como Claude, ChatGPT, Gemini, Copilot, Google Workspace e Microsoft 365.",
+    },
+    {
+      question: "O treinamento é online ou presencial?",
+      answer: "O AI Foundations pode ser online ou in-company. Os AI Workshops são in-company e organizados por área. O AI Tech-help acontece em sessões 1:1, sob demanda.",
+    },
+    {
+      question: "É possível personalizar os exemplos?",
+      answer: "Sim. Ferramentas, casos de uso e nível da equipe orientam o desenho do treinamento e dos exercícios.",
+    },
+    {
+      question: "Como contratar?",
+      answer: "Fale com a Playbook. A primeira conversa serve para entender a operação, o público e qual dos três programas faz sentido.",
+    },
+  ],
 } as const;
 
 /* ---------- footer ---------- */

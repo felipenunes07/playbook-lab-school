@@ -24,7 +24,6 @@ export function Teaching() {
 
         <div className="cards" style={{ ["--cols" as string]: 2 }}>
           {TEACHING.items.map((item, index) => {
-            const pending = item.href === "#";
             const external = item.href.startsWith("http");
 
             return (
@@ -32,17 +31,13 @@ export function Teaching() {
                 <p className="eyebrow teaching-kind">{item.kind}</p>
                 <h3 className="h3">{item.title}</h3>
                 <p>{item.body}</p>
-                {pending ? (
-                  <span className="teaching-cta is-pending">{item.cta}</span>
-                ) : (
-                  <a
-                    className="teaching-cta"
-                    href={item.href}
-                    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  >
-                    {item.cta} <Arrow />
-                  </a>
-                )}
+                <a
+                  className="teaching-cta"
+                  href={item.href}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {item.cta} <Arrow />
+                </a>
               </Reveal>
             );
           })}

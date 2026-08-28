@@ -1,185 +1,74 @@
-/* ============================================================
-   PLAYBOOK LAB · TREINAMENTO CORPORATIVO DE IA
-   Sistema visual: registro Stripe, cor de marca Playbook.
-
-   Definido na call de 24/08 com o Victor. As regras vieram
-   literalmente do que ele apontou na tela:
-
-   · "tem título, subtítulo, botõezinhos, empresas passando.
-      Legal, bem isso"  → fórmula do hero
-   · "poderia ter título, subtítulo, daí uma frase de duas, três
-      linhas, MENOR. E daí algumas caixinhas falando de coisas,
-      item 1, 2, 3, 4. Bem bonito"  → fórmula de toda seção
-   · "muito muito grande, em exagero. Deixar pouquinho mais
-      curto, fonte menor"  → h1 a 60px, não 90px
-   · "aqui tem espaço gigantesco. Aproveitar melhor o
-      espaçamento"  → bandas de 96px, não 168px
-   · "acho que passando é mais legal, deixa mais fininha essa
-      linha"  → marquee de logos volta, faixa fina
-   · "essas caixinhas com ícones é coisa de IA... não parece web
-      codado"  → caixinha é texto, nunca ícone
-   · "se [o efeito de fundo] não fizer parte da identidade
-      visual ou não agregar, eu também nem quero"  → o único
-      degradê da página é verde de marca, no hero
-   · "muita poluição visual" MAS TAMBÉM "não gosto de espaço em
-      branco sem nada"  → densidade média: cheio de conteúdo,
-      organizado em grade
-   · "eu quero que site converta, não que fique só bonito"
-
-   Registro anterior ("memorando executivo": filete, zero sombra,
-   zero raio, bandas enormes) caiu no segundo erro — leu como
-   "espaço em branco sem nada" e "parece blog".
-   ============================================================ */
-
-
-/* ---------- display: Archivo ----------
-   Revertido do Bodoni Moda por decisão do cliente: a serifa de alto
-   contraste foi rejeitada no teste que importa — o olho dele. Archivo
-   500/600/700 é o que estava aprovado. */
 @font-face {
   font-family: Archivo;
   src: url("/fonts/Archivo-500-normal-latin.woff2") format("woff2");
   font-weight: 500;
+  font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-@font-face {
-  font-family: Archivo;
-  src: url("/fonts/Archivo-500-normal-latin-ext.woff2") format("woff2");
-  font-weight: 500;
-  font-display: swap;
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
+
 @font-face {
   font-family: Archivo;
   src: url("/fonts/Archivo-600-normal-latin.woff2") format("woff2");
   font-weight: 600;
+  font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-@font-face {
-  font-family: Archivo;
-  src: url("/fonts/Archivo-600-normal-latin-ext.woff2") format("woff2");
-  font-weight: 600;
-  font-display: swap;
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
+
 @font-face {
   font-family: Archivo;
   src: url("/fonts/Archivo-700-normal-latin.woff2") format("woff2");
   font-weight: 700;
+  font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: Archivo;
-  src: url("/fonts/Archivo-700-normal-latin-ext.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* ---------- corpo: Inter ---------- */
 @font-face {
   font-family: Inter;
   src: url("/fonts/Inter-400.woff2") format("woff2");
   font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: Inter;
   src: url("/fonts/Inter-500.woff2") format("woff2");
   font-weight: 500;
+  font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: Inter;
   src: url("/fonts/Inter-600.woff2") format("woff2");
   font-weight: 600;
+  font-style: normal;
   font-display: swap;
 }
 
 :root {
-  /* ---------- superfícies ----------------------------------------
-     Branco como base (Stripe é branco), e uma superfície levemente
-     esverdeada para alternar seções sem trocar de assunto. O bege
-     ficou: "cara, eu acho ok", então virou a superfície alternada
-     em vez da base. */
   --paper: #ffffff;
-  --surface: #f6f9f6;
-  --surface-2: #eef4ef;
-  --ink-deep: #08281a;
+  --surface: #f5f6f5;
+  --surface-strong: #e9eeeb;
+  --ink: #0b2f1e;
+  --text: #52615a;
+  --muted: #65736b;
+  --line: #dfe7e2;
+  --line-strong: #cbd8d0;
+  --accent: #07843b;
+  --accent-dark: #045f2a;
+  --accent-bright: #18c719;
+  --accent-soft: #e4f5e7;
+  --forest: #062b17;
+  --white: #ffffff;
 
-  /* ---------- tinta ----------------------------------------------
-     Verde-petróleo escuro no lugar do azul-marinho da Stripe. É o
-     que mantém a identidade sem usar o verde-néon como texto. */
-  --ink: #0d2a1d;
-  --ink-soft: #3f594c;
-  --muted: #5f7568;
-  --on-dark: #f2f7f3;
-  --on-dark-soft: rgba(242, 247, 243, 0.72);
-  --on-dark-faint: rgba(242, 247, 243, 0.56);
-  --on-dark-line: rgba(242, 247, 243, 0.16);
+  --font-display: Archivo, Arial, sans-serif;
+  --font-body: Inter, Arial, sans-serif;
 
-  /* ---------- linhas ---------------------------------------------- */
-  --line: #e3eae5;
-  --line-strong: #cfdbd3;
-
-  /* ---------- acento ----------------------------------------------
-     Duas versões, por contraste medido:
-       · --accent      → texto e link sobre branco. 5,2:1. AA ok.
-       · --accent-live → verde de marca. Só em fundo escuro e no
-                         degradê do hero, nunca como texto sobre
-                         branco (mede 2,3:1, reprova).  */
-  --accent: #0d7d3c;
-  --accent-hover: #0a6531;
-  --accent-live: #14c114;
-  --accent-wash: #eaf5ee;
-
-  /* ---------- geometria -------------------------------------------
-     Raio 8px e elevação suave: é o que separa "produto bem feito"
-     de "wireframe". O registro anterior tinha raio 3 e zero sombra
-     e leu como documento — não era o que ele queria. */
-  --radius: 8px;
-  --radius-lg: 12px;
-  --shadow-sm: 0 1px 2px rgba(13, 42, 29, 0.06), 0 1px 3px rgba(13, 42, 29, 0.05);
-  --shadow-md: 0 2px 4px rgba(13, 42, 29, 0.05), 0 8px 20px rgba(13, 42, 29, 0.07);
-  --shadow-lg: 0 4px 8px rgba(13, 42, 29, 0.05), 0 18px 44px rgba(13, 42, 29, 0.11);
-
-  /* ---------- layout ----------------------------------------------- */
-  --container: 1140px;
-  --gutter: clamp(20px, 4vw, 40px);
-
-  /* ---------- ritmo vertical ----------------------------------------
-     "Aqui tem espaço gigantesco." Era clamp(92px, 10vw, 168px). */
-  --band: clamp(64px, 6.4vw, 96px);
-  --band-lg: clamp(76px, 7.4vw, 112px);
-
-  /* ---------- tipografia --------------------------------------------
-     "Muito muito grande, em exagero. Deixar pouquinho mais curto,
-     fonte menor." O h1 era clamp(44px, 5.4vw, 80px). */
-  --font-display: Archivo, Inter, -apple-system, "Segoe UI", Arial, sans-serif;
-  --font-body: Inter, -apple-system, "Segoe UI", Arial, sans-serif;
-
-  --fs-display: clamp(35px, 3.9vw, 58px);  /* h1 */
-  --fs-h2: clamp(28px, 2.9vw, 42px);
-  --fs-h3: 19px;                            /* título de caixinha */
-  --fs-number: clamp(46px, 5.2vw, 76px);
-  --fs-lead: clamp(17px, 1.25vw, 19px);
-  --fs-body: 16px;
-  --fs-sm: 14.5px;
-  --fs-eyebrow: 13px;
-
-  --lh-display: 1.06;
-  --lh-body: 1.6;
-
-  --ls-display: -0.028em;
-  --ls-h2: -0.024em;
-  --ls-eyebrow: 0.075em;
-
-  /* ---------- motion ------------------------------------------------
-     O movimento voltou: marquee de logos, nome da ferramenta
-     alternando, entrada suave no scroll. Nada que pisque ou pulse. */
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur: 0.6s;
+  --container: 1200px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --section: clamp(104px, 10vw, 156px);
+  --radius-sm: 12px;
+  --radius: 16px;
+  --shadow-soft: 0 22px 60px rgba(23, 56, 43, 0.08);
 }

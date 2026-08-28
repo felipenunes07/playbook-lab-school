@@ -1,58 +1,52 @@
 import { Reveal } from "../ui/Reveal";
-import { PROBLEM } from "../../data/site";
+import { PROBLEM, WHY_TRAIN } from "../../data/site";
 
-/**
- * Frase grande à esquerda, os três sintomas espremidos à direita —
- * o layout que o próprio Victor desenhou na call olhando uma seção
- * que não tinha funcionado: "talvez se isso tiver espremido do lado
- * direito, e do lado esquerdo essa frase maior ali, talvez funcione."
- *
- * Os sintomas ficaram na vertical, não em três caixas horizontais:
- * "dá pra só transformar a orientação, ao invés de horizontal na
- * vertical". E sem ícone — ícone em caixinha foi o que ele apontou
- * como cara de página gerada por IA.
- *
- * É a seção que ele mais quer: "mostrar que a gente sabe qual é o
- * problema que o cara está vivendo."
- */
 export function Problem() {
   return (
-    <section
-      className="problem band band--lg band--surface"
-      id="problema"
-      aria-labelledby="problem-title"
-    >
-      <div className="container problem-inner">
-        <Reveal className="problem-side">
-          <p className="eyebrow">{PROBLEM.eyebrow}</p>
-          <h2 id="problem-title" className="h2 problem-statement">
-            {PROBLEM.statement.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-          </h2>
-          <p className="lead">{PROBLEM.lead}</p>
+    <>
+      <section className="why band" id="por-que-treinar" aria-labelledby="why-title">
+        <div className="container">
+          <Reveal className="why-head">
+            <div>
+              <p className="eyebrow">{WHY_TRAIN.eyebrow}</p>
+              <h2 id="why-title" className="h2">{WHY_TRAIN.headline}</h2>
+            </div>
+            <p className="lead">{WHY_TRAIN.lead}</p>
+          </Reveal>
 
-          <p className="problem-close">
-            {PROBLEM.close.map((line) => (
-              <span key={line}>{line}</span>
+          <ol className="why-reasons">
+            {WHY_TRAIN.reasons.map((reason, index) => (
+              <Reveal as="li" key={reason.title} order={index}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{reason.title}</h3>
+                <p>{reason.body}</p>
+              </Reveal>
             ))}
-          </p>
-        </Reveal>
+          </ol>
+        </div>
+      </section>
 
-        <ol className="problem-list">
-          {PROBLEM.symptoms.map((symptom, index) => (
-            <Reveal as="li" key={symptom.title} order={index}>
-              <span className="problem-num" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="h3">{symptom.title}</h3>
-                <p>{symptom.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
-      </div>
-    </section>
+      <section className="pain band band--surface" id="problema" aria-labelledby="pain-title">
+        <div className="container pain-grid">
+          <Reveal className="pain-head">
+            <p className="eyebrow">{PROBLEM.eyebrow}</p>
+            <h2 id="pain-title" className="h2">{PROBLEM.headline}</h2>
+            <p className="lead">{PROBLEM.lead}</p>
+          </Reveal>
+
+          <ol className="pain-list">
+            {PROBLEM.symptoms.map((symptom, index) => (
+              <Reveal as="li" key={symptom.title} order={index}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{symptom.title}</h3>
+                  <p>{symptom.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </>
   );
 }

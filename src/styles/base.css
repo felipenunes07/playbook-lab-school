@@ -15,55 +15,21 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  overflow-x: hidden;
   overflow-x: clip;
   background: var(--paper);
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
+  font-size: 17px;
+  line-height: 1.65;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-figcaption,
-blockquote,
-dl,
-dd,
-ul,
-ol {
-  margin: 0;
-}
-
-ul,
-ol {
-  padding: 0;
-  list-style: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  border: 0;
-  padding: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-
+body,
+button,
 a,
-button {
+summary {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -73,255 +39,214 @@ svg {
   max-width: 100%;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+summary {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+p,
+blockquote,
+figure,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
 ::selection {
-  background: var(--accent-wash);
+  background: var(--accent-soft);
   color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 3px;
+  outline: 3px solid rgba(13, 125, 60, 0.36);
+  outline-offset: 4px;
 }
 
-/* ============================================================
-   A FÓRMULA DE SEÇÃO
-
-   Literalmente o que o Victor descreveu apontando para a Stripe:
-   "poderia ter título, subtítulo, daí uma frase de duas, três
-   linhas, MENOR. E daí algumas caixinhas falando de coisas —
-   item 1, item 2, item 3, item 4. Bem bonito."
-
-     .eyebrow  →  .h2  →  .lead  →  .cards > .card
-
-   Toda seção da página usa esta ordem. É a repetição dela que
-   dá organização; o registro anterior variava o layout a cada
-   seção e o resultado foi ler "disperso".
-   ============================================================ */
-
 .container {
-  width: min(100% - var(--gutter) * 2, var(--container));
+  width: min(var(--container), calc(100% - (2 * var(--gutter))));
   margin-inline: auto;
 }
 
 .band {
-  padding-block: var(--band);
-}
-
-.band--lg {
-  padding-block: var(--band-lg);
+  padding-block: var(--section);
 }
 
 .band--surface {
-  background: var(--surface);
+  background: linear-gradient(180deg, #fafbfa 0%, #f0f2f1 100%);
 }
 
-.band--dark {
-  background: var(--ink-deep);
-  color: var(--on-dark);
-}
-
-.band--rule {
-  border-top: 1px solid var(--line);
-}
-
-/* ---------- tipo ---------- */
-
-/* Eyebrow na cor de marca — é o gesto que mais diz "Stripe".
-   No registro anterior era cinza e desaparecia. */
 .eyebrow {
-  display: block;
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
   color: var(--accent);
-}
-
-.band--dark .eyebrow {
-  color: var(--accent-live);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .display {
-  font-family: var(--font-display);
-  font-size: var(--fs-display);
-  font-weight: 600;
-  line-height: var(--lh-display);
-  letter-spacing: var(--ls-display);
-  text-wrap: balance;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.06;
 }
 
 .h2 {
-  font-family: var(--font-display);
-  font-size: var(--fs-h2);
-  font-weight: 600;
+  font-size: clamp(34px, 4vw, 48px);
   line-height: 1.1;
-  letter-spacing: var(--ls-h2);
-  text-wrap: balance;
 }
 
-.h2 > span {
-  display: block;
+.h2 span {
+  color: var(--accent);
 }
 
-.h3 {
-  font-family: var(--font-body);
-  font-size: var(--fs-h3);
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.014em;
-}
-
-/* "Uma frase de duas, três linhas, menor." */
 .lead {
-  max-width: 58ch;
-  font-size: var(--fs-lead);
-  line-height: 1.58;
-  letter-spacing: -0.008em;
-  color: var(--ink-soft);
-  text-wrap: pretty;
-}
-
-.band--dark .lead {
-  color: var(--on-dark-soft);
+  color: var(--text);
+  font-size: clamp(17px, 1.5vw, 19px);
+  line-height: 1.65;
 }
 
 .section-head {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  max-width: 720px;
+  max-width: 760px;
+}
+
+.section-head .eyebrow,
+.section-head .h2 + .lead {
+  margin-top: 20px;
 }
 
 .section-head .h2 {
-  max-width: 20ch;
+  margin-top: 18px;
 }
 
-/* Cabeça em duas colunas: título à esquerda, frase à direita. Sem
-   isto, o título ocupava metade da largura e a outra metade ficava
-   vazia — "espaço em branco sem nada". */
-.section-head--split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 14px clamp(40px, 6vw, 88px);
-  align-items: end;
-  max-width: 100%;
+.btn {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
-.section-head--split .eyebrow {
-  grid-column: 1 / -1;
+.btn:hover {
+  transform: translateY(-1px);
 }
 
-.section-head--split .h2 {
-  max-width: 15ch;
+.btn--primary {
+  background: var(--accent);
+  color: var(--white);
 }
 
-.section-head--split .lead {
-  max-width: 46ch;
-  padding-bottom: 4px;
+.btn--primary:hover {
+  background: var(--accent-dark);
 }
 
-/* ---------- as caixinhas ----------
-   Texto, nunca ícone: "essas caixinhas com esses ícones é coisa
-   [de IA]... a mesma estrutura só que não parece web codado."
-
-   E nunca pílula de fundo tingido. Fundo claro tingido + raio total +
-   texto pequeno, repetido em fila, é a assinatura mais reconhecível de
-   página gerada por IA — e não informa nada, só pinta a categoria.
-   Onde havia pílula agora há tabela de especificação com filete, ou
-   uma linha de texto com meio-ponto. Ver `.spec` em app.css.
-
-   A regra: IA decora categoria, design compõe informação. */
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
-  gap: 20px;
-  margin-top: clamp(36px, 4vw, 54px);
-}
-
-.card {
-  position: relative;
-  padding: 28px 26px 30px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+.btn--secondary {
+  border-color: var(--line-strong);
   background: var(--paper);
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform 0.25s var(--ease),
-    box-shadow 0.25s var(--ease),
-    border-color 0.25s var(--ease);
+  color: var(--ink);
 }
 
-/* A régua de acento de 34px no topo saiu: três cards com o mesmo
-   tiquinho colorido idêntico é decoração de template, e o card já tem
-   título para se identificar. No lugar dela, o acento aparece só na
-   interação — interação é informação, não enfeite. */
-.card:hover {
-  transform: translateY(-3px);
+.btn--secondary:hover {
   border-color: var(--accent);
-  box-shadow: var(--shadow-md);
+  color: var(--accent);
 }
 
-.card h3 {
-  margin-top: 0;
+.btn-arrow {
+  flex: 0 0 auto;
 }
 
-.card p {
-  margin-top: 12px;
-  font-size: var(--fs-sm);
-  line-height: 1.62;
-  color: var(--muted);
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
-/* ---------- reveal ----------
-   Opt-in: só esconde depois que o JS confirmou que consegue
-   mostrar de volta. Ver src/lib/reveal-support.ts. */
-
-.js-reveal .reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity var(--dur) var(--ease),
-    transform var(--dur) var(--ease);
-}
-
-.js-reveal .reveal.is-in {
+.reveal {
   opacity: 1;
   transform: none;
 }
 
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.js-reveal .reveal.is-in,
 .reveal-off .reveal {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
-  .js-reveal .reveal {
-    opacity: 1;
-    transform: none;
+    transition-duration: 0.01ms !important;
   }
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  .band {
+    padding-block: clamp(60px, 17vw, 72px);
+  }
+
+  .display {
+    font-size: clamp(36px, 10.4vw, 40px);
+  }
+
+  .h2 {
+    font-size: clamp(31px, 9vw, 38px);
+  }
+
+  .btn {
+    min-height: 50px;
+    padding-inline: 20px;
+  }
 }

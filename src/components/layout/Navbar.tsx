@@ -13,8 +13,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
-  // O filete e a sombra só entram depois do scroll: no topo a barra
-  // se dissolve no degradê verde do hero.
+  // O filete e a sombra aparecem apenas depois do scroll.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -42,10 +41,10 @@ export function Navbar() {
       <div className="container header-inner">
         <a href={LINKS.site} className="brand" aria-label="Playbook Lab — página inicial">
           <img
-            src="/brand/playbooklab-logo-light.svg"
+            src="/brand/playbooklab-logo.svg"
             alt="Playbook Lab"
-            width={40}
-            height={34}
+            width={48}
+            height={41}
             className="brand-mark"
           />
           <span className="brand-offer">Treinamento de IA</span>
